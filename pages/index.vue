@@ -19,8 +19,10 @@
                 h2.section-title Berita
 
                 .categories
-                    a.item(:class="{'active': activeCategory === $index}" v-for="(category, $index) in categories" @click="activeCategory = $index")
-                        span(v-html="category.name")
+                    a.item(class="active")
+                        span Semua Berita
+                    //- a.item(:class="{'active': activeCategory === $index}" v-for="(category, $index) in categories" @click="activeCategory = $index")
+                    //-     span(v-html="category.name")
                 .news
                     .item(v-for="post in posts")
                         a(:href="post.link")

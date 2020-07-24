@@ -7,14 +7,18 @@
             .child__center
                 h3.text-white  Antrian
         section.sec-1(v-if="! snapshot.no_queue")
-            .appointments.mb(v-if="snapshot")
+            .appointments.mb(v-if="!snapshot")
+                .spec
+                    .doctor
+                        label.doctor__name Tidak ada reservasi 
+            .appointments.mb(v-if="snapshot && ! snapshot.my_queue.rating")
                 .spec
                     .doctor
                         //- span.text-muted {{ now }}
                         //- br
                         label.doctor__name {{ snapshot.service.name }}
                         //- h6.text-muted {{ time }}
-            .appointments(v-if="snapshot")
+            .appointments(v-if="snapshot && ! snapshot.my_queue.rating")
                 h6.text-bold {{ $moment(snapshot.my_queue.checking_time).format('dddd, DD MMMM YYYY') }}
                 h6.text-bold No. Antrian
                 h3.number-queue {{ snapshot.sameday_queues.length }}
@@ -27,16 +31,18 @@
                     h6 Lihat Detail Antrian
                 table.table(v-show="showContent[0]")
                     thead
+
                         tr.f12
                             th No
                             th Prediksi Waktu
                             th Status
                     tbody
                         tr(v-for="(item, $index) in snapshot.sameday_queues" v-if="item.status != 2")
-                            td {{ $index+1 }}
-                            td {{ $moment(item.checking_time, "YYYY-MM-DD HH:mm:ss").format("HH:mm") }}
+                            td.has-text-centered {{ $index+1 }}
+                            td.has-text-centered {{ $moment(item.checking_time, "YYYY-MM-DD HH:mm:ss").format("HH:mm") }}
                             //- td {{ $moment(snapshot.service.schedules[0].time_start, "HH:mm:ss").add(15*$index, 'minutes').format("HH:mm") }}
-                            td {{ $moment().format('YYYY-MM-DD') < item.checking_time ? "Booked" : item.status }}
+                            //- td {{ $moment().format('YYYY-MM-DD') < item.checking_time ? "Booked" : item.status }}
+                            td.has-text-centered {{ item.status }}
             .premium-modal
                 .modal.ph2(v-bind:class="{'is-active':isShow}")
                     .modal-background
@@ -57,7 +63,7 @@
                             div.gap-1
                                 button.mr-10.button.is-danger.is-half(@click='modalClose()') tidak
                                 button.ml-10.button.is-success.is-half(@click='cancelQueue()') iya
-        section.sec-2(v-if="snapshot && snapshot.my_queue.status === 'done' && snapshot.my_queue.rating === 0")
+        section.sec-2(v-if="snapshot && snapshot.my_queue.status === 'done' && ! snapshot.my_queue.rating")
             .review
                 div(style="display:flex; justify-content: center; align-items: center; flex-direction: column; margin-bottom: 20px")
                     h5.section-title.gap-2 Review 
@@ -65,12 +71,14 @@
                                 inactive-color="#c1c1c1"
                                 active-color="#ffc53e"
                                 v-model="rating"
-                                v-bind:star-size="40")
+                                v-bind:star-size="50"
+                                :show-rating="false"
+                                )
                 textarea.textarea(placeholder="Tulis kritik dan saran disini" v-model="critic")
                 .button-submit.mt-10
                     button.button.btn-save.is-rounded(@click="sendReview()") Kirim Penilaian 
 
-        section.sec-2
+        section.sec-news
             h2.section-title Berita Terbaru
             carousel.news(items="2" :nav="false" v-if="postsLoaded" :autoplay="true")
                 .item(v-for="post in posts")
@@ -335,4 +343,7 @@ $bd-grey: #e5e5e5
 
         span 
             margin-left: 10px
+.sec-news 
+    padding-top: 0px
+    margin-top: -15px
 </style> 

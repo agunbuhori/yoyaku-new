@@ -40,13 +40,13 @@
                         .img-ads(v-if="service.priority == 1")
                             img(src="/images/ads.png")
                         .img-wrapper
-                            img(:src="'https://ui-avatars.com/api/?background=0D8ABC&color=fff&name='+service.name")
+                            img(:src="service.picture ? service.picture : '/images/default.png' ")
                         h6.f10(v-if="service.distance")
                             span(class="ti-location-pin") 
                             | {{ service.distance.toFixed(2) }} KM
-                        h6.f10
+                        h6.f10(v-if="service.rating != '' ")
                             span(class="ti-star")
-                            | {{ service.rating }} (200)
+                            |  {{ service.rating }} ({{ service.user_rating }})
                     nuxt-link.b_two(:to="'/service?id='+service.id")
                         h6.f12.has-text-weight-semibold {{ service.name.substring(0,25)+".." }}
                         h4.service-name {{ service.group_name }} 
@@ -55,7 +55,7 @@
                             | {{ $moment().format('YYYY') - service.since }} Tahun
                         h6.f10
                             span.mr-5(class="ti-wallet")
-                            | Mulai dari Rp{{ service.price }}
+                            | Mulai dari Rp. {{ formatPrice(service.price) }}
                         h6.f10
                             span.mr-5(class="ti-alarm-clock")
                             span.fn-10(v-for="schedule in service.schedules") {{ schedule.day }} &nbsp;
@@ -131,6 +131,10 @@ export default {
         //         alert('It seems like Geolocation, which is required for this page, is not enabled in your browser. Please use a browser which supports it.');
         //     }
         // },
+        formatPrice(value) {
+            let val = (value/1).toFixed(2).replace('.', ',')
+            return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
+        },
         getCategories() {
             this.$axios.$get("home")
             .then(response => {

@@ -4,9 +4,7 @@
   section.sec-tosca(v-if="snapshotLoaded") 
     .profile-services
       .pict
-        img(
-          :src="'https://ui-avatars.com/api/?background=0D8ABC&color=fff&name=' + snapshot.name"
-        )
+        img(:src="snapshot.picture ? snapshot.picture : '/images/default.png' ")
         .favorite
           button
             span.ti-heart(
@@ -16,13 +14,13 @@
       h5.title-service.gap-2 {{ snapshot.name }}
       //- h5.f14-service {{ group.name }}
       .d-flex.gap-2
-        h5.f14-service
+        h5.f14-service(v-if="snapshot.rating != '' ")
           span.mr-5.ti-star
-          | {{ snapshot.rating }} (89)
+          | {{ snapshot.rating }} ({{ snapshot.user_rating }})
         h5.f14-service
           span.mr-5.ti-bag
           | {{ $moment().format('YYYY') - snapshot.since }} Tahun
-      h5.f14-service.gap-2 Biaya Mulai Rp. {{ snapshot.price }}
+      h5.f14-service.gap-2 Biaya Mulai Rp. {{ formatPrice(snapshot.price) }}
   section.sec-2
     .desc-service
       h5.f14 Jam Operasional
@@ -34,15 +32,15 @@
       h5.f12-desc.gap-1 {{ snapshot.address }}
       h5.f14.gap-2 Tentang
       h5.f12-desc.gap-1 {{ snapshot.description }}
-      h5.f14.gap-2 Review 
-    //-   table.gap-1
-    //-       tr(v-for="i in 3")
-    //-           td Fasilitas
-    //-           td 
-    //-               star-rating(v-bind:max-rating="5"
-    //-               inactive-color="#c1c1c1"
-    //-               active-color="#ffc53e"
-    //-               v-bind:star-size="30" :read-only="true" :show-rating="false")
+      h5.f14.gap-2 Rating 
+      table.gap-1
+          tr
+              td 
+                  star-rating(v-bind:max-rating="5"
+                  inactive-color="#c1c1c1"
+                  active-color="#ffc53e"
+                  :rating="snapshot.rating"
+                  v-bind:star-size="30" :read-only="true" :show-rating="false")
     .btn-appointment
       nuxt-link(:to="'/appointment?id=' + snapshot.id")
         button.button.is-tosca.is-medium.is-fullwidth.is-rounded
@@ -91,6 +89,10 @@ export default {
     // await this.getSnapshot();
   },
   methods: {
+    formatPrice(value) {
+        let val = (value/1).toFixed(2).replace('.', ',')
+        return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
+    },
     async getSnapshot() {
       await this.$axios
         .$get("service/" + this.$route.query.id)
@@ -155,12 +157,14 @@ export default {
                 padding-bottom: 5px
 
 .btn-appointment
-    width: 100%
+    width: 90%
     position: fixed
     bottom: 0
     left: 0
     margin-bottom: $gap2
     z-index: 10
+    margin-left: 5%
+
 
 .title-service
     font-size: 16pt

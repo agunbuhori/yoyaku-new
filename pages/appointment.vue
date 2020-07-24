@@ -4,20 +4,20 @@
         section.sec-tosca
            .profile-services
                 .pict
-                    img(:src="'https://ui-avatars.com/api/?background=0D8ABC&color=fff&name='+snapshot.name")
+                    img(:src="snapshot.picture ? snapshot.picture : '/images/default.png' ")
                     .favorite
                         button
                             span.ti-heart(@click="postfavorite(snapshot.id)" :style="snapshot.favorite ? { 'color': 'red' } : null")
                 h5.title-service.gap-2 {{ snapshot.name }}
                 h5.f14-service {{ snapshot.group.name }}
                 .d-flex.gap-2
-                    h5.f14-service
+                    h5.f14-service(v-if="snapshot.rating != '' ")
                         span.mr-5(class="ti-star")
-                        | 4.5 (89)
+                        | {{ snapshot.rating }} ({{ snapshot.user_rating }})
                     h5.f14-service
                         span.mr-5(class="ti-bag")
-                        |  {{ snapshot.since }} Tahun
-                h5.f14-service.gap-2 Biaya Mulai Rp{{ snapshot.price }}
+                        |  {{ $moment().format('YYYY') - snapshot.since }} Tahun
+                h5.f14-service.gap-2 Biaya Mulai Rp. {{ formatPrice(snapshot.price) }}
         section.sec-2
             .desc-service
                 h5.f14 Tanggal Tersedia
@@ -113,6 +113,10 @@
         // await this.getSnapshot();
     },
     methods: {
+        formatPrice(value) {
+            let val = (value/1).toFixed(2).replace('.', ',')
+            return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
+        },
         addComplaint(complaint, id) {
             let find = this.complaints.find(item => item === complaint);
 
@@ -141,22 +145,22 @@
                 this.snapshot.favorite = ! this.snapshot.favorite;
             })
         },
-        getSnapshot() {
-            this.$axios.$get("http://localhost/antrian/public/api/member/service/"+this.$route.query.id)
-            .then(response => {
-                this.snapshotLoaded = true;
-                this.snapshot = response;
-                this.title = response.group.reason.title;
-                this.descriptions= JSON.parse(response.group.reason.description)
+        // getSnapshot() {
+        //     this.$axios.$get("http://localhost/yoyaku-laravel/public/api/member/service/"+this.$route.query.id)
+        //     .then(response => {
+        //         this.snapshotLoaded = true;
+        //         this.snapshot = response;
+        //         this.title = response.group.reason.title;
+        //         this.descriptions= JSON.parse(response.group.reason.description)
 
-                response.dates.forEach(date => {
-                    response.dates_available.forEach(item => {
-                        if (item === date)
-                            this.unavailables.push(item);
-                    })
-                });
-            })
-        },
+        //         response.dates.forEach(date => {
+        //             response.dates_available.forEach(item => {
+        //                 if (item === date)
+        //                     this.unavailables.push(item);
+        //             })
+        //         });
+        //     })
+        // },
         inArray(item) {
             return this.unavailables.indexOf(item) == '-1';
         },

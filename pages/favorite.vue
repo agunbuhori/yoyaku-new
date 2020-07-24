@@ -8,7 +8,7 @@
                 .service_box(v-for="(favorite, $index) in snapshot.services.data")
                     nuxt-link.b_one(:to="'/service?id='+favorite.id")
                         .img-wrapper
-                            img(:src='favorite.picture')
+                            img(:src="favorite.picture ? favorite.picture : '/images/default.png' ")
                         h6.f10
                             span(class="ti-location-pin") 
                             | {{ favorite.KM }}  KM
