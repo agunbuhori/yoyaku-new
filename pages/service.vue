@@ -1,0 +1,197 @@
+<template lang="pug">
+.wrapper
+  Header
+  section.sec-tosca(v-if="snapshotLoaded") 
+    .profile-services
+      .pict
+        img(
+          :src="'https://ui-avatars.com/api/?background=0D8ABC&color=fff&name=' + snapshot.name"
+        )
+        .favorite
+          button
+            span.ti-heart(
+              @click="postfavorite(snapshot.id)",
+              :style="snapshot.favorite ? { color: 'red' } : null"
+            )
+      h5.title-service.gap-2 {{ snapshot.name }}
+      //- h5.f14-service {{ group.name }}
+      .d-flex.gap-2
+        h5.f14-service
+          span.mr-5.ti-star
+          | {{ snapshot.rating }} (89)
+        h5.f14-service
+          span.mr-5.ti-bag
+          | {{ $moment().format('YYYY') - snapshot.since }} Tahun
+      h5.f14-service.gap-2 Biaya Mulai Rp. {{ snapshot.price }}
+  section.sec-2
+    .desc-service
+      h5.f14 Jam Operasional
+      table.gap-1
+        tr(v-for="schedule in snapshot.schedules")
+          td {{ schedule.day }}
+          td {{ $moment(schedule.time_start, 'HH:mm:ss').format('HH:mm') }} - {{ $moment(schedule.time_end, 'HH:mm:ss').format('HH:mm') }}
+      h5.f14 Alamat
+      h5.f12-desc.gap-1 {{ snapshot.address }}
+      h5.f14.gap-2 Tentang
+      h5.f12-desc.gap-1 {{ snapshot.description }}
+      h5.f14.gap-2 Review 
+    //-   table.gap-1
+    //-       tr(v-for="i in 3")
+    //-           td Fasilitas
+    //-           td 
+    //-               star-rating(v-bind:max-rating="5"
+    //-               inactive-color="#c1c1c1"
+    //-               active-color="#ffc53e"
+    //-               v-bind:star-size="30" :read-only="true" :show-rating="false")
+    .btn-appointment
+      nuxt-link(:to="'/appointment?id=' + snapshot.id")
+        button.button.is-tosca.is-medium.is-fullwidth.is-rounded
+          span.mr-5.ti-calendar
+          | Buat Janji
+</template>
+
+<script>
+import StarRating from "vue-star-rating";
+import BottomNav from "~/components/BottomNav";
+import Header from "~/components/Header";
+
+export default {
+  async asyncData({ $axios, params, store, route }) {
+    const { latitude, longitude } = store.state.location;
+    const snapshot = await $axios.$get("service/" + route.query.id, {
+      params: {
+        lat: latitude,
+        long: longitude,
+      },
+    });
+
+    return { snapshot };
+  },
+  middleware: "member",
+  components: {
+    BottomNav,
+    Header,
+    StarRating,
+  },
+  data() {
+    return {
+      // snapshot: {},
+      snapshotLoaded: true,
+      isClicked: false,
+      favorite: {},
+      liked: false,
+    };
+  },
+  computed: {
+    member() {
+      return this.$store.state.member;
+    },
+  },
+  async mounted() {
+    // await this.getSnapshot();
+  },
+  methods: {
+    async getSnapshot() {
+      await this.$axios
+        .$get("service/" + this.$route.query.id)
+        .then((response) => {
+          this.snapshotLoaded = true;
+          this.snapshot = response;
+        });
+    },
+    async postfavorite(id) {
+      await this.$axios
+        .$post("add_favorite", {
+          service_id: id,
+          favorite: this.snapshot.favorite ? 0 : 1,
+        })
+        .then((response) => {
+          this.snapshot.favorite = !this.snapshot.favorite;
+        });
+    },
+  },
+}
+</script>
+
+<style lang="sass" scoped> 
+@import '~/assets/sass/style.sass';
+
+.is-red 
+    color: red
+
+.sec-tosca
+    background-color: $tosca
+.profile-services
+    .pict
+        display: flex
+        justify-content: center
+        align-items: center
+        img 
+            border-radius: 50%
+            width: 135px
+            height: 135px
+        .favorite 
+            background-color: white
+            width: 50px
+            height: 50px
+            border-radius: 50%
+            margin-left: -30px
+            margin-top: 85px
+            text-align: center
+            padding-top: 8px
+            button 
+                border: none
+                background: none
+
+                .ti-heart
+                    color: #ccc
+                    font-size: 30px
+
+.desc-service
+    table
+        width: 100%
+        tr
+            td
+                padding-bottom: 5px
+
+.btn-appointment
+    width: 100%
+    position: fixed
+    bottom: 0
+    left: 0
+    margin-bottom: $gap2
+    z-index: 10
+
+.title-service
+    font-size: 16pt
+    color: white
+    text-align: center
+
+.gap-1
+    margin-top: $gap1
+
+.gap-2
+    margin-top: $gap2
+
+.f14-service
+    font-size: 14pt
+    color: white
+    text-align: center
+
+.f14
+    color: #000
+    font-weight: 600
+    font-size: 14pt
+
+.f12-desc
+    font-weight: 400
+    font-size: 12pt
+    text-align: justify
+
+.mr-5 
+    margin-right: 5px
+
+.d-flex
+    display: flex
+    justify-content: space-around
+</style>

@@ -1,0 +1,42 @@
+{
+  "name": "Yoyaku",
+  "version": "1.0.0",
+  "description": "My incredible Nuxt.js project",
+  "author": "Agun Buhori",
+  "private": true,
+  "scripts": {
+    "dev": "nuxt",
+    "build": "nuxt build",
+    "start": "nuxt start",
+    "generate": "nuxt generate",
+    "test": "jest"
+  },
+  "dependencies": {
+    "@nuxtjs/auth": "^4.9.1",
+    "@nuxtjs/axios": "^5.9.7",
+    "@nuxtjs/bulma": "^1.2.1",
+    "@nuxtjs/dotenv": "^1.4.0",
+    "@nuxtjs/firebase": "^5.0.7",
+    "@nuxtjs/pwa": "^3.0.0-0",
+    "firebase": "^7.14.0",
+    "google-signin-vue": "^1.2.2",
+    "moment": "^2.24.0",
+    "nuxt": "^2.0.0",
+    "v-owl-carousel": "^1.0.8",
+    "vue-star-rating": "^1.6.1",
+    "vue2-datepicker": "^3.4.1",
+    "vue2-timepicker": "^1.1.3",
+    "vuex": "^3.1.3"
+  },
+  "devDependencies": {
+    "@nuxtjs/moment": "^1.6.1",
+    "@vue/test-utils": "^1.0.0-beta.27",
+    "babel-jest": "^24.1.0",
+    "jest": "^24.1.0",
+    "node-sass": "^4.13.1",
+    "pug": "^2.0.4",
+    "pug-plain-loader": "^1.0.0",
+    "sass-loader": "^8.0.2",
+    "vue-jest": "^4.0.0-0"
+  }
+}
