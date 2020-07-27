@@ -18,7 +18,7 @@
                         //- br
                         label.doctor__name {{ snapshot.service.name }}
                         //- h6.text-muted {{ time }}
-            .appointments(v-if="snapshot && ! snapshot.my_queue.rating")
+            .appointments.sec-appointment(v-if="snapshot && ! snapshot.my_queue.rating")
                 h6.text-bold {{ $moment(snapshot.my_queue.checking_time).format('dddd, DD MMMM YYYY') }}
                 h6.text-bold No. Antrian
                 h3.number-queue {{ snapshot.my_queue.number }}
@@ -61,8 +61,8 @@
                         .modal-card-body.body-modal
                             h6.f12.mb  Apakah anda yakin membatalkan antrian ?
                             div.gap-1
-                                button.mr-10.button.is-danger.is-half(@click='modalClose()') tidak
-                                button.ml-10.button.is-success.is-half(@click='cancelQueue()') iya
+                                button.mr-10.button.is-danger.is-half(@click='modalClose()') Tidak
+                                button.ml-10.button.is-success.is-half(@click='cancelQueue()') Iya
         section.sec-2(v-if="snapshot && snapshot.my_queue.status === 'done' && ! snapshot.my_queue.rating")
             .review
                 div(style="display:flex; justify-content: center; align-items: center; flex-direction: column; margin-bottom: 20px")
@@ -346,4 +346,7 @@ $bd-grey: #e5e5e5
 .sec-news 
     padding-top: 0px
     margin-top: -15px
+
+.sec-appointment 
+    margin-bottom: 15px
 </style> 
