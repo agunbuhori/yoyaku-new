@@ -9,12 +9,12 @@
                     nuxt-link.b_one(:to="'/service?id='+favorite.id")
                         .img-wrapper
                             img(:src="favorite.picture ? favorite.picture : '/images/default.png' ")
-                        h6.f10
+                        h6.f10(v-if="favorite.distance")
                             span(class="ti-location-pin") 
-                            | {{ favorite.KM }}  KM
-                        h6.f10
+                            | {{ service.distance.toFixed(2) }} KM
+                        h6.f10(v-if="favorite.rating != '' ")
                             span(class="ti-star")
-                            | 4.5 (200)
+                            |  {{ favorite.rating }} ({{ favorite.user_rating }})
                     nuxt-link.b_two(:to="'/service?id='+favorite.id")
                         h6.f12.has-text-weight-semibold {{ favorite.name.substring(0,25)+".." }}
                         h4.service-name {{ favorite.name.substring(0,20)+".." }} 

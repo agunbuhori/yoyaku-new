@@ -21,7 +21,7 @@
             .appointments(v-if="snapshot && ! snapshot.my_queue.rating")
                 h6.text-bold {{ $moment(snapshot.my_queue.checking_time).format('dddd, DD MMMM YYYY') }}
                 h6.text-bold No. Antrian
-                h3.number-queue {{ snapshot.sameday_queues.length }}
+                h3.number-queue {{ snapshot.my_queue.number }}
                 .button_flex(v-if="snapshot.my_queue.status === 'waiting'")
                     //- .w50
                     //-     button.button.is-tosca.is-outlined.is-fullwidth(@click="updateQueue()") Edit
@@ -38,7 +38,7 @@
                             th Status
                     tbody
                         tr(v-for="(item, $index) in snapshot.sameday_queues" v-if="item.status != 2")
-                            td.has-text-centered {{ $index+1 }}
+                            td.has-text-centered {{ item.number }}
                             td.has-text-centered {{ $moment(item.checking_time, "YYYY-MM-DD HH:mm:ss").format("HH:mm") }}
                             //- td {{ $moment(snapshot.service.schedules[0].time_start, "HH:mm:ss").add(15*$index, 'minutes').format("HH:mm") }}
                             //- td {{ $moment().format('YYYY-MM-DD') < item.checking_time ? "Booked" : item.status }}
