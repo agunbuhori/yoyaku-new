@@ -37,7 +37,7 @@
             .groups-service
                 .service_box(v-for="service in snapshot.data" )
                     nuxt-link.b_one(:to="'/service?id='+service.id")
-                        .img-ads(v-if="service.priority == 1")
+                        .img-ads(v-if="service.premium == 1")
                             img(src="/images/ads.png")
                         .img-wrapper
                             img(:src="service.picture ? service.picture : '/images/default.png' ")
