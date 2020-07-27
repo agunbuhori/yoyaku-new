@@ -33,14 +33,26 @@
       h5.f14.gap-2 Tentang
       h5.f12-desc.gap-1 {{ snapshot.description }}
       h5.f14.gap-2 Rating 
-      table.gap-1
-          tr
-              td 
-                  star-rating(v-bind:max-rating="5"
-                  inactive-color="#c1c1c1"
-                  active-color="#ffc53e"
-                  :rating="snapshot.rating"
-                  v-bind:star-size="30" :read-only="true" :show-rating="false")
+      .rate-user.mb-2.gap-2
+        .div.has-text-centered
+          .f30.has-text-weight-semibold {{ snapshot.rating }}
+          star-rating(v-bind:max-rating="5"
+          inactive-color="#c1c1c1"
+          active-color="#ffc53e"
+          :rating="snapshot.rating"
+          :increment="snapshot.rating"
+          v-bind:star-size="25" :read-only="true" :show-rating="false")
+          h4.text-muted ({{ snapshot.user_rating }})
+        .div.gap-1(style="width: 60%")
+          .rate-user(v-for="i in (0,5)")
+            .numb 5
+            |&nbsp;&nbsp;
+            progress.progress.is-small.is-warning(value="50" max="100")
+            |&nbsp;&nbsp;
+            .numb.text-muted 10
+          nuxt-link(:to="'/comment?id='+snapshot.id") 
+            h5.has-text-right.text-muted  Lihat Komentar 
+              span.ti-angle-right
     .btn-appointment
       nuxt-link(:to="'/appointment?id=' + snapshot.id")
         button.button.is-tosca.is-medium.is-fullwidth.is-rounded
@@ -155,6 +167,16 @@ export default {
         tr
             td
                 padding-bottom: 5px
+.rate-user
+  display: flex
+  justify-content: space-between
+
+  .progress
+    margin-bottom: 0.50rem 
+    
+  .numb 
+    font-size: 15px
+    margin-top: -5px
 
 .btn-appointment
     width: 90%
@@ -194,6 +216,9 @@ export default {
 
 .mr-5 
     margin-right: 5px
+
+.mb-2
+  margin-bottom: $gap2
 
 .d-flex
     display: flex

@@ -327,31 +327,11 @@
                         
                         input[type=radio] 
                             display: none 
-    .checkbox-desc 
-        width: 48%
-        display: inline-block !important
-        margin-left: 3px
-        margin-right: 3px
-        margin-bottom: 5px
-
-        label.checkbox 
-            display: inline-block
-            cursor: pointer
-            width: 100%
-            text-align: center
-            margin: 0.05rem
-            border: 1px solid #ccc
-            padding: 0.40rem
-            background: $light
-            color: #000
-        
-        input[type=checkbox]:checked + label.checkbox 
-            border: 1px solid #ccc
-            background: $tosca
-            color: #fff !important
-
-        input[type=checkbox] 
-            display: none
+    .group-checkbox 
+        button
+            width: 48%
+            margin-left: 3px
+            margin-right: 3px
     
     .pre-modal 
         .modal-card 
