@@ -30,10 +30,10 @@
           td {{ $moment(schedule.time_start, 'HH:mm:ss').format('HH:mm') }} - {{ $moment(schedule.time_end, 'HH:mm:ss').format('HH:mm') }}
       h5.f14 Alamat
       h5.f12-desc.gap-1 {{ snapshot.address }}
-      h5.f14.gap-2 Tentang
+      h5.f14.gap-2.mb-2 Tentang
       h5.f12-desc.gap-1 {{ snapshot.description }}
-      h5.f14.gap-2 Rating 
-      .rate-user.mb-2.gap-2
+      h5.f14.gap-2(v-if="snapshot.rating != '' ") Rating
+      .rate-user.mb-2.gap-2(v-if="snapshot.rating != '' ")
         .div.has-text-centered
           .f30.has-text-weight-semibold {{ snapshot.rating }}
           star-rating(v-bind:max-rating="5"
@@ -44,12 +44,12 @@
           v-bind:star-size="25" :read-only="true" :show-rating="false")
           h4.text-muted ({{ snapshot.user_rating }})
         .div.gap-1(style="width: 60%")
-          .rate-user(v-for="i in (0,5)")
-            .numb 5
+          .rate-user(v-for="rates in snapshot.rating_data")
+            .numb {{ rates.rate }}
             |&nbsp;&nbsp;
-            progress.progress.is-small.is-warning(value="50" max="100")
+            progress.progress.is-small.is-warning(:value=" rates.rate" max="100")
             |&nbsp;&nbsp;
-            .numb.text-muted 10
+            .numb.text-muted {{ rates.total }}
           nuxt-link(:to="'/comment?id='+snapshot.id") 
             h5.has-text-right.text-muted  Lihat Komentar 
               span.ti-angle-right
@@ -90,6 +90,7 @@ export default {
       isClicked: false,
       favorite: {},
       liked: false,
+      isHide: true,
     };
   },
   computed: {

@@ -3,8 +3,8 @@
         .header-control
             .child
                 button(v-if="title !== 'index'")
-                    label
-                        span(class="ti-arrow-left")
+                    label(@click="back()")
+                        span(class="ti-arrow-left" )
             .child-center
                 h2.has-text-white {{ this.$route.name === 'comment' ? 'Komentar' : '' }}
                 h2.has-text-white {{ this.$route.name === 'search' ? 'Cari' : '' }}
@@ -28,13 +28,13 @@ export default {
         }
     },
     computed: {
-        back() {
-            this.$router.back();
-        }
     },
     mounted() {
     },
     methods: {
+         back() {
+            this.$router.back();
+        }
     }
 }
 </script>

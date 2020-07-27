@@ -13,24 +13,24 @@
         v-bind:star-size="25" :read-only="true" :show-rating="false")
         h4.text-muted ({{ snapshot.user_rating }})
       .div.gap-1(style="width: 60%")
-        .rate-user(v-for="i in (0,5)")
-          .numb 5
+        .rate-user(v-for="rates in snapshot.rating_data")
+          .numb {{ rates.rate }}
           |&nbsp;&nbsp;
-          progress.progress.is-small.is-warning(value="50" max="100")
+          progress.progress.is-small.is-warning(:value="rates.rate" max="100")
           |&nbsp;&nbsp;
-          .numb.text-muted 10
+          .numb.text-muted {{ rates.total }}
   section.sec-2
-    .comment(v-for="i in (0,3)")
-      h5.has-text-weight-semibold Lorem ipsum dolor
+    .comment(v-for="comment in snapshot.comments")
+      h5.has-text-weight-semibold {{ comment.user }}
       .d-rate
         star-rating(v-bind:max-rating="5"
         inactive-color="#c1c1c1"
         active-color="#ffc53e"
-        :rating="2.4"
-        :increment="2.4"
+        :rating="comment.rating"
+        :increment="comment.rating"
         v-bind:star-size="15" :read-only="true" :show-rating="false")
-        span.text-muted 10 Juli 2020
-      p lorem ipsum dolor sit amet lorem ipsum dolor sit amet  lorem ipsum dolor sit amet 
+        span.text-muted {{ comment.checking_time }}
+      p {{ comment.critic }}
 </template>
 
 <script>
