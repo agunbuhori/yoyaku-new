@@ -332,7 +332,7 @@
         width: 100%
 
         button
-            width: 49%
+            width: 48%
             margin-left: 2px
             margin-right: 2px
             margin-top: 5px
