@@ -16,7 +16,7 @@
         .rate-user(v-for="rates in snapshot.rating_data")
           .numb {{ rates.rate }}
           |&nbsp;&nbsp;
-          progress.progress.is-small.is-warning(:value="rates.rate" max="100")
+          progress.progress.is-small.is-warning(:value="rates.total" :max="rates.total * 2")
           |&nbsp;&nbsp;
           .numb.text-muted {{ rates.total }}
   section.sec-2
