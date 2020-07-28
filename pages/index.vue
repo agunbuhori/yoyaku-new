@@ -14,7 +14,7 @@
                         nuxt-link.item.centered.dir-column(v-for="(group, $index) in snapshot.groups" :to="'/search?group='+group.id" :key="$index")
                             img(:src="group.picture")
                             span {{ group.name }}
-        section.sec-home
+        section.sec-1
             h2.has-text-weight-bold Berita
             .categories
                 a.item(class="active")
@@ -226,6 +226,6 @@ $padding-item: 10px
                 line-height: 13px
 .sec-home 
     padding-top: 0px
-    margin-top: -15px
+    margin-top: -13px
 
 </style> 
