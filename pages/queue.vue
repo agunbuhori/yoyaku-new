@@ -10,7 +10,12 @@
             .appointments.mb(v-if="!snapshot")
                 .spec
                     .doctor
-                        label.doctor__name Tidak ada reservasi 
+                        img(src="/images/nothing.png" width="10%")
+                        h4.text-tosca.has-text-weight-bold Tidak ada reservasi
+                        p.text-muted.is-5 Anda belum mengambil nomor antrian, silahkan melakukan reservasi
+
+                        nuxt-link(to="/search")
+                            button.gap-2.button.is-tosca Buat Janji
             .appointments.mb(v-if="snapshot && ! snapshot.my_queue.rating")
                 .spec
                     .doctor
@@ -34,7 +39,7 @@
 
                         tr.f12
                             th No
-                            th Prediksi Waktu
+                            th Prediksi
                             th Status
                     tbody
                         tr(v-for="(item, $index) in snapshot.sameday_queues" v-if="item.status != 2")
@@ -42,7 +47,7 @@
                             td.has-text-centered {{ $moment(item.checking_time, "YYYY-MM-DD HH:mm:ss").format("HH:mm") }}
                             //- td {{ $moment(snapshot.service.schedules[0].time_start, "HH:mm:ss").add(15*$index, 'minutes').format("HH:mm") }}
                             //- td {{ $moment().format('YYYY-MM-DD') < item.checking_time ? "Booked" : item.status }}
-                            td.has-text-centered {{ item.status }}
+                            td.has-text-centered.text-muted {{ item.status }}
             .premium-modal
                 .modal.ph2(v-bind:class="{'is-active':isShow}")
                     .modal-background
@@ -330,6 +335,9 @@ $bd-grey: #e5e5e5
     overflow: hidden
 .mb 
     margin-bottom: $gap2
+
+.gap-2
+    margin-top: 2rem
 
 .button-submit
     text-align: center
