@@ -61,7 +61,7 @@ export default {
             img
                 height: 35px
             h2
-                margin-left: -20px
+                margin-left: -38px
                 
         button 
             font-size: 20px
