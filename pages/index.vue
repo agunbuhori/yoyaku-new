@@ -2,11 +2,11 @@
     .wrapper
         Header
         div(v-if="snapshotLoaded")
-            carousel.sec-0.banner.no-pb(items="1" :nav="false" v-if="snapshotLoaded")
+            carousel.sec-0.no-pb(items="1" :nav="false" v-if="snapshotLoaded")
                 a(v-for="adver in snapshot.advertisements" :href="adver.backlink")
                     img(:src="'http://localhost/yoyaku-laravel/public/'+ adver.picture" )
 
-            section.sec-1
+            section.sec-home
                 h2.section-title Spesialis
 
                 .specialis
@@ -14,9 +14,8 @@
                         nuxt-link.item.centered.dir-column(v-for="(group, $index) in snapshot.groups" :to="'/search?group='+group.id" :key="$index")
                             img(:src="group.picture")
                             span {{ group.name }}
-            
-        section.sec-2
-            h2.section-title Berita
+        section.sec-home
+            h2.has-text-weight-bold Berita
             .categories
                 a.item(class="active")
                     span Semua Berita
@@ -225,5 +224,8 @@ $padding-item: 10px
                 display: inline-block;
                 color: #000
                 line-height: 13px
+.sec-home 
+    padding-top: 0px
+    margin-top: -15px
 
 </style> 
