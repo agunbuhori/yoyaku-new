@@ -231,6 +231,7 @@
                     background: none
 
                     .ti-heart
+                        color: #ccc
                         font-size: 30px
     .desc-service
         .select-day 

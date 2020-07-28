@@ -3,12 +3,6 @@
         Header
         section.sec-1
             .profile
-                .item 
-                    .icon
-                        nuxt-link(to="/profile")
-                            span(class="ti-angle-left")
-                    .info
-                        h2 Edit Profil
                 .item
                     .icon
                         img(src='/images/1.png')

@@ -5,7 +5,7 @@
             .d-flex
                 h1.section-title Profil
                 span.f12
-                    nuxt-link(to="/update") Edit Profile |
+                    nuxt-link(to="/update") Edit Profil |
                     a.red(@click="signout")  Keluar
             .profile
                 .item(v-for="profile in profiles")

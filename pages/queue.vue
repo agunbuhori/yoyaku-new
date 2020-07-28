@@ -12,7 +12,7 @@
                     .doctor
                         img(src="/images/nothing.png" width="10%")
                         h4.text-tosca.has-text-weight-bold Tidak ada reservasi
-                        h5.text-muted.is-5 Anda belum mengambil nomor antrian, silahkan melakukan reservasi
+                        h5.text-muted Anda belum mengambil nomor antrian, silahkan melakukan reservasi
 
                         nuxt-link(to="/search")
                             button.gap-2.button.is-tosca Buat Janji
@@ -70,8 +70,8 @@
                                 button.ml-10.button.is-success.is-half(@click='cancelQueue()') Iya
         section.sec-2(v-if="snapshot && snapshot.my_queue.status === 'done' && ! snapshot.my_queue.rating")
             .review
-                div(style="display:flex; justify-content: center; align-items: center; flex-direction: column; margin-bottom: 20px")
-                    h5.section-title.gap-2 Review 
+                div
+                    h5.section-title Review 
                     star-rating(v-bind:max-rating="5"
                                 inactive-color="#c1c1c1"
                                 active-color="#ffc53e"
@@ -82,9 +82,8 @@
                 textarea.textarea(placeholder="Tulis kritik dan saran disini" v-model="critic")
                 .button-submit.mt-10
                     button.button.btn-save.is-rounded(@click="sendReview()") Kirim Penilaian 
-
-        section.sec-news
-            h2.section-title Berita Terbaru
+        section.sec-3
+            h2.has-text-weight-bold Berita Terbaru
             carousel.news(items="2" :nav="false" v-if="postsLoaded" :autoplay="true")
                 .item(v-for="post in posts")
                     a(:href="post.link") 
@@ -284,7 +283,13 @@ $bd-grey: #e5e5e5
     text-decoration: line-through
     // color: grey
 
-
+.review
+    text-align: center
+    margin-bottom: $gap2
+    div
+        display:flex 
+        justify-content: center 
+        align-items: center
       
 .crown 
     background: #1592E6
@@ -375,6 +380,4 @@ $bd-grey: #e5e5e5
     padding-top: 0px
     margin-top: -15px
 
-.sec-appointment 
-    margin-bottom: 15px
 </style> 
