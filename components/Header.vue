@@ -60,13 +60,16 @@ export default {
             margin: 0 auto
             img
                 height: 35px
+            h2
+                margin-left: -20px
+                
         button 
             font-size: 20px
             border: none
             padding: 0
             background: none
 
-            span 
+            .ti-arrow-left 
                 margin-left: 10px
                 font-weight: bold
                 color: white

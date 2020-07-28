@@ -4,7 +4,7 @@
         div(v-if="snapshotLoaded")
             carousel.sec-0.banner.no-pb(items="1" :nav="false" v-if="snapshotLoaded")
                 a(v-for="adver in snapshot.advertisements" :href="adver.backlink")
-                    img(:src="adver.picture" )
+                    img(:src="'http://localhost/yoyaku-laravel/public/'+ adver.picture" )
 
             section.sec-1
                 h2.section-title Spesialis
@@ -17,7 +17,6 @@
             
         section.sec-2
             h2.section-title Berita
-
             .categories
                 a.item(class="active")
                     span Semua Berita

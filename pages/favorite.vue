@@ -22,7 +22,7 @@
                             span.mr-5(class="ti-bag")
                             | {{ favorite.since }} Tahun Pengalaman
                         h6.f10
-                            span.mr-5(class="ti-money")
+                            span.mr-5(class="ti-wallet")
                             | Mulai dari Rp. {{formatPrice(favorite.price) }}
                         h6.f10
                             span.mr-5(class="ti-alarm-clock")
@@ -146,8 +146,14 @@
                     width: 100%
                     img 
                         width: 65px
-                        border-radius: 40px
+                        border-radius: 50%
                         height: 65px
+                    
+                    @media screen and (min-width: $small)
+                        img 
+                            margin: 0 auto
+                            width: 60%
+                            height: 60%
             .b_two
                 width: 65%
 
@@ -164,8 +170,19 @@
                     background: none
                     .ti-heart
                         font-size: 25px
+                        
+        @media screen and (min-width: $small)
+            .b_one
+                text-align: center
 
-                
+            .b_three
+                width: 10%
+                margin-left: -5px
+                button
+                    border: none
+                    background: none
+                    .ti-heart
+                        font-size: 50px
 
     .pd-10
         padding: 10px

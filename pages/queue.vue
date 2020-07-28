@@ -12,7 +12,7 @@
                     .doctor
                         img(src="/images/nothing.png" width="10%")
                         h4.text-tosca.has-text-weight-bold Tidak ada reservasi
-                        p.text-muted.is-5 Anda belum mengambil nomor antrian, silahkan melakukan reservasi
+                        h5.text-muted.is-5 Anda belum mengambil nomor antrian, silahkan melakukan reservasi
 
                         nuxt-link(to="/search")
                             button.gap-2.button.is-tosca Buat Janji
