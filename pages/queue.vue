@@ -6,7 +6,7 @@
                   span(class="ti-angle-left")
             .child__center
                 h3.text-white  Antrian
-        section.sec-1(v-if="! snapshot.no_queue")
+        section.sec-queue(v-if="!snapshot.no_queue")
             .appointments.mb(v-if="!snapshot")
                 .spec
                     .doctor
@@ -68,10 +68,10 @@
                             div.gap-1
                                 button.mr-10.button.is-danger.is-half(@click='modalClose()') Tidak
                                 button.ml-10.button.is-success.is-half(@click='cancelQueue()') Iya
-        section.sec-2(v-if="snapshot && snapshot.my_queue.status === 'done' && ! snapshot.my_queue.rating")
+        section.sec-queue.mb(v-if="snapshot && snapshot.my_queue.status === 'done' && ! snapshot.my_queue.rating")
             .review
                 div
-                    h5.section-title Review 
+                    h4.section-title Review 
                     star-rating(v-bind:max-rating="5"
                                 inactive-color="#c1c1c1"
                                 active-color="#ffc53e"
@@ -79,10 +79,10 @@
                                 v-bind:star-size="50"
                                 :show-rating="false"
                                 )
-                textarea.textarea(placeholder="Tulis kritik dan saran disini" v-model="critic")
-                .button-submit.mt-10
+                textarea.textarea.gap-1(placeholder="Tulis kritik dan saran disini" v-model="critic")
+                .button-submit
                     button.button.btn-save.is-rounded(@click="sendReview()") Kirim Penilaian 
-        section.sec-3
+        section.sec-news
             h2.has-text-weight-bold Berita Terbaru
             carousel.news(items="2" :nav="false" v-if="postsLoaded" :autoplay="true")
                 .item(v-for="post in posts")
@@ -279,13 +279,19 @@ $bd-grey: #e5e5e5
                         border-bottom: 1px solid grey
                         width: 100%
 
+.sec-queue
+    padding-left: $gap2
+    padding-right: $gap2
+
 .text-failed 
     text-decoration: line-through
     // color: grey
 
 .review
+    padding-top: 0px
+    margin-top: -25px
     text-align: center
-    margin-bottom: $gap2
+
     div
         display:flex 
         justify-content: center 
@@ -353,13 +359,18 @@ $bd-grey: #e5e5e5
 
 .ml-10
     margin-left: 10px 
+
 .doctor__name
     font-size: 12pt
+
 .table
     border-radius: $br1
     overflow: hidden
 .mb 
     margin-bottom: $gap2
+
+.gap-1
+    margin-top: 1rem
 
 .gap-2
     margin-top: 2rem
