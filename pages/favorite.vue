@@ -23,7 +23,7 @@
                             | {{ favorite.since }} Tahun Pengalaman
                         h6.f10
                             span.mr-5(class="ti-money")
-                            | Mulai dari Rp. {{favorite.premium_price }}
+                            | Mulai dari Rp. {{formatPrice(favorite.price) }}
                         h6.f10
                             span.mr-5(class="ti-alarm-clock")
                             span.fn-10(v-for="schedule in favorite.schedules") {{ schedule.day }}&nbsp;
@@ -73,6 +73,10 @@
         // this.getFavorites();
     },
     methods: {
+        formatPrice(value) {
+            let val = (value/1).toFixed(2).replace('.', ',')
+            return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
+        },
         getFavorites() {
             this.$axios.$get("favorites/"+this.member.uid+"?with_detail=true")
             .then(response => {

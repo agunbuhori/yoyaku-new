@@ -42,12 +42,12 @@
                             th Prediksi
                             th Status
                     tbody
-                        tr(v-for="(item, $index) in snapshot.sameday_queues" v-if="item.status != 2")
+                        tr(v-for="(item, $index) in snapshot.sameday_queues" v-if="item.status != 2")(:class="item.status == 'failed' ? 'strikeout' : ' ' ")
                             td.has-text-centered {{ item.number }}
                             td.has-text-centered {{ $moment(item.checking_time, "YYYY-MM-DD HH:mm:ss").format("HH:mm") }}
                             //- td {{ $moment(snapshot.service.schedules[0].time_start, "HH:mm:ss").add(15*$index, 'minutes').format("HH:mm") }}
                             //- td {{ $moment().format('YYYY-MM-DD') < item.checking_time ? "Booked" : item.status }}
-                            td.has-text-centered.text-muted {{ item.status }}
+                            td.has-text-centered {{ item.status }}
             .premium-modal
                 .modal.ph2(v-bind:class="{'is-active':isShow}")
                     .modal-background
@@ -255,6 +255,7 @@ $bd-grey: #e5e5e5
     table
         width: 100%
         margin-top: $dstnc
+        
 
         thead 
             background: $tosca
@@ -262,9 +263,28 @@ $bd-grey: #e5e5e5
                 color: white
                 text-align: center   
         tbody
-           .premium
+            .premium
                 background-color: #1592E6
                 color: #FFE200
+
+            .strikeout 
+                color: grey
+                td 
+                    position: relative
+                td 
+                    &::before
+                        content: " "
+                        position: absolute
+                        top: 50%
+                        left: 0
+                        border-bottom: 1px solid grey
+                        width: 100%
+
+.text-failed 
+    text-decoration: line-through
+    // color: grey
+
+
       
 .crown 
     background: #1592E6

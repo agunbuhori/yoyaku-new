@@ -279,6 +279,7 @@ $pd-10: 10px
 
         &:first-child
             margin-top: 0
+        
 
         .b_one
             width: 25%
@@ -290,10 +291,17 @@ $pd-10: 10px
                 position: absolute 
             .img-wrapper
                 width: 100%
+                
                 img 
                     width: 65px
-                    border-radius: 40px
+                    border-radius: 50%
                     height: 65px
+
+                @media screen and (min-width: $small)
+                    img 
+                        margin: 0 auto
+                        width: 70%
+                        height: 70%
         .b_two
             width: 65%
 
@@ -310,6 +318,10 @@ $pd-10: 10px
                 background: none
                 .ti-heart
                     font-size: 25px
+                    
+    @media screen and (min-width: $small)
+        .b_one
+            text-align: center
 
 .owl-carousel
     .owl-item

@@ -15,22 +15,22 @@
                             img(:src="group.picture")
                             span {{ group.name }}
             
-            section.sec-2
-                h2.section-title Berita
+        section.sec-2
+            h2.section-title Berita
 
-                .categories
-                    a.item(class="active")
-                        span Semua Berita
-                    //- a.item(:class="{'active': activeCategory === $index}" v-for="(category, $index) in categories" @click="activeCategory = $index")
-                    //-     span(v-html="category.name")
-                .news
-                    .item(v-for="post in posts")
-                        a(:href="post.link")
-                            .news__img(:style="'background-image: url('+post.better_featured_image.media_details.sizes.medium.source_url+');'")
-                        .info
-                            span {{ post.date | moment }}
-                            br
-                            a(:href="post.link") {{ post.title.rendered.substring(0,35)+".." }}
+            .categories
+                a.item(class="active")
+                    span Semua Berita
+                //- a.item(:class="{'active': activeCategory === $index}" v-for="(category, $index) in categories" @click="activeCategory = $index")
+                //-     span(v-html="category.name")
+            .news
+                .item(v-for="post in posts")
+                    a(:href="post.link")
+                        .news__img(:style="'background-image: url('+post.better_featured_image.media_details.sizes.medium.source_url+');'")
+                    .info
+                        span {{ post.date | moment }}
+                        br
+                        a(:href="post.link") {{ post.title.rendered.substring(0,35)+".." }}
         BottomNav
 </template>
 
@@ -54,7 +54,7 @@ export default {
     data() {
         return {
             snapshot: {},
-            snapshotLoaded: false,
+            // snapshotLoaded: false,
             categories: [],
             activeCategory: 0,
             posts: [],
@@ -62,13 +62,15 @@ export default {
         }
     },
     computed: {
-        authentication() {
-            return this.$store.state.authentication
-        }
+        // authentication() {
+        //     return this.$store.state.authentication
+        // }
     },
     mounted() {
         this.getSnapshot();
         this.getLocation();
+        this.getPostCategories();
+        this.getPosts();
     },
     methods: {
         async getSnapshot() {
@@ -79,7 +81,6 @@ export default {
                 if (status === 200) {
                     this.snapshotLoaded = true;
                     this.snapshot = data;
-                    this.getPostCategories();
 
                     let groupLength = data.groups.length + 1;
                 }
@@ -93,7 +94,6 @@ export default {
                 if (status === 200) {
                     this.categories = data;
 
-                    this.getPosts();
                 }
             })
         },
@@ -202,6 +202,14 @@ $padding-item: 10px
         background-size: cover
         margin-bottom: 10px
 
+    @media screen and (min-width: $small)
+         &__img
+            width: 100%
+            border-radius: $br1
+            height: 150px
+            background-size: cover
+            margin-bottom: 10px
+
     .item
         margin-left: 5px
         margin-right: 5px
@@ -218,4 +226,5 @@ $padding-item: 10px
                 display: inline-block;
                 color: #000
                 line-height: 13px
+
 </style> 

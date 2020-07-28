@@ -28,11 +28,11 @@
         tr(v-for="schedule in snapshot.schedules")
           td {{ schedule.day }}
           td {{ $moment(schedule.time_start, 'HH:mm:ss').format('HH:mm') }} - {{ $moment(schedule.time_end, 'HH:mm:ss').format('HH:mm') }}
-      h5.f14 Alamat
-      h5.f12-desc.gap-1 {{ snapshot.address }}
-      h5.f14.gap-2.mb-2 Tentang
-      h5.f12-desc.gap-1 {{ snapshot.description }}
-      h5.f14.gap-2(v-if="snapshot.rating != '' ") Rating
+      h5.f14.gap-1 Alamat
+      h5.f12-desc {{ snapshot.address }}
+      h5.f14.gap-1 Tentang
+      h5.f12-desc {{ snapshot.description }}
+      h5.f14.gap-1(v-if="snapshot.rating != '' ") Rating
       .rate-user.mb-2.gap-2(v-if="snapshot.rating != '' ")
         .div.has-text-centered
           .f30.has-text-weight-semibold {{ snapshot.rating }}

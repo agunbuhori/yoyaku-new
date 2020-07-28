@@ -328,10 +328,9 @@
                         input[type=radio] 
                             display: none 
     .group-checkbox 
-        display: initial
-        width: 100%
+        display: initial !important
 
-        button
+        .button
             width: 48%
             margin-left: 2px
             margin-right: 2px

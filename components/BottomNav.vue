@@ -42,7 +42,7 @@ export default {
     left: 50%;
     transform: translateX(-50%);
     width: 100%;
-    max-width: 600px;
+    max-width: 768px;
     z-index: 99;
     padding-top: 7px;
 
