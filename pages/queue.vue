@@ -23,7 +23,7 @@
                         //- br
                         label.doctor__name {{ snapshot.service.name }}
                         //- h6.text-muted {{ time }}
-            .appointments.sec-appointment(v-if="snapshot && ! snapshot.my_queue.rating")
+            .appointments.sec-appointment.mb(v-if="snapshot && ! snapshot.my_queue.rating")
                 h6.text-bold {{ $moment(snapshot.my_queue.checking_time).format('dddd, DD MMMM YYYY') }}
                 h6.text-bold No. Antrian
                 h3.number-queue {{ snapshot.my_queue.number }}
@@ -68,8 +68,8 @@
                             div.gap-1
                                 button.mr-10.button.is-danger.is-half(@click='modalClose()') Tidak
                                 button.ml-10.button.is-success.is-half(@click='cancelQueue()') Iya
-        section.sec-queue.mb(v-if="snapshot && snapshot.my_queue.status === 'done' && ! snapshot.my_queue.rating")
-            .review
+        section.sec-queue(v-if="snapshot && snapshot.my_queue.status === 'done' && ! snapshot.my_queue.rating")
+            .review.mb
                 div
                     h4.section-title Review 
                     star-rating(v-bind:max-rating="5"
