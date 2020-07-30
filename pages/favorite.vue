@@ -22,7 +22,7 @@
                             | {{ favorite.since }} Tahun Pengalaman
                         h6.f10
                             span.mr-5(class="ti-wallet")
-                            | Mulai dari Rp. {{formatPrice(favorite.price) }}
+                            | Mulai Rp. {{formatPrice(favorite.price) }}
                         h6.f10
                             span.mr-5(class="ti-alarm-clock")
                             span.fn-10(v-for="schedule in favorite.schedules") {{ schedule.day }}&nbsp;

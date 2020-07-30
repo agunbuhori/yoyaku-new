@@ -83,7 +83,7 @@
                 .button-submit
                     button.button.btn-save.is-rounded(@click="sendReview()") Kirim Penilaian 
         section.sec-news
-            h2.has-text-weight-bold Berita Terbaru
+            h2.has-text-weight-bold Berita
             carousel.news(items="2" :nav="false" v-if="postsLoaded" :autoplay="true")
                 .item(v-for="post in posts")
                     a(:href="post.link") 
@@ -91,6 +91,23 @@
                     .info
                         //- span {{ post.categories }}
                         a(:href="post.link") {{ post.title.rendered.substring(0,30)+".." }}
+        section.sec-3
+            div(v-for="i in (0,2)")
+                .ads-title
+                    img(src="/images/d-umum.png")
+                    .text-title Dokter Umum
+                carousel.ads-group(items="2" :nav="false")
+                    .ads-group__item(v-for="i in (0,3)")
+                        .ads-group__item__body
+                            .img-ads
+                                img(src="/images/ads.png")
+                            .main-img
+                                img(src="/images/default.png")
+                            h6.has-text-weight-bold Dokter Bandung
+                            h6
+                                span(class="ti-star")
+                                |  3.4
+
         
         BottomNav
 </template>
@@ -293,7 +310,6 @@ $bd-grey: #e5e5e5
 .text-failed 
     text-decoration: line-through
     // color: grey
-
 .review
     padding-top: 0px
     margin-top: -25px
@@ -324,9 +340,9 @@ $bd-grey: #e5e5e5
     border: 3px solid #1592E6
     border-radius: 15px
 
-
 .section-bg
     background: $light
+
 .news
     margin: 0 -5px
 
@@ -357,6 +373,57 @@ $bd-grey: #e5e5e5
         .body-modal 
             border-radius: 6px
             text-align: center !important
+
+.ads-title
+    display: flex
+    margin-bottom: $gap1
+
+    .text-title
+        font-size: 18px
+        font-weight: bold
+        margin-top: 5px
+    img
+        width: 30px
+        
+.ads-group
+    padding: 0px
+    &__item
+        margin-left: 5px
+        margin-right: 5px
+        margin-bottom: 10px
+
+        &__body
+            width: 100%
+            height: auto
+            background: $white
+            border: 1px solid #eeeeee
+            border-radius: 5px
+            text-align: center
+            display: block
+            padding: 5px
+        
+            .img-ads
+                width: 40px
+                z-index: 15 
+                top: 0
+                left: 0
+                margin-left: 5px
+                position: absolute
+
+            .main-img
+                display: flex
+                justify-content: center
+                align-items: center
+                flex-direction: column
+                img
+                    width: 55%
+
+            @media screen and (min-width: $small)
+                .main-img
+                    img
+                        width: 25%
+
+            
 
 .is-half
     width: 30%
@@ -394,7 +461,12 @@ $bd-grey: #e5e5e5
 
         span 
             margin-left: 10px
+
 .sec-news 
+    padding-top: 0px
+    margin-top: -15px
+
+.sec-ads 
     padding-top: 0px
     margin-top: -15px
 

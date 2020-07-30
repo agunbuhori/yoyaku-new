@@ -48,7 +48,7 @@
             .group-checkbox
                 button.button(:class="{'is-tosca': complaints.findIndex(item => item === reason.title) !== -1}")(v-for="(reason, $index) in snapshot.reasons" @click="addComplaint(reason.title, $index)") {{ reason.title }}
             .btn-send.gap-2
-                button.button.is-tosca.is-fullwidth.is-rounded(@click="openBooking()" v-if="complaints.length && date !== ''")
+                button.button.is-tosca.is-fullwidth.is-rounded(@click="openBooking($moment(date).format('dd'))" v-if="complaints.length && date !== ''")
                     span.mr-5(class="ti-calendar")
                     | Kirim
             .pre-modal
@@ -68,7 +68,8 @@
                             h6.modal-card-title Prediksi Waktu
                         .modal-card-body.body-modal
                             h3.has-text-weight-semibold {{ date | moment }}
-                            h1.has-text-weight-bold {{ $date | times }} 
+                            div(v-for="schedule in snapshot.schedules")
+                                h1.has-text-weight-bold(v-if="schedule.little_day == little_day") {{ schedule.finish_time }} 
                             h6.f12  Apakah anda akan melanjutkan ?
                             div.gap-1
                                 button.mr-5.button.is-tosca.is-outlined.is-full(@click="closeBooking()") Tidak
@@ -117,6 +118,7 @@
             favorite: {},
             complaints: [],
             date: "",
+            little_day: ""
         }
     },
     computed: {
@@ -208,8 +210,10 @@
         closeBooking: function() {
             this.isBook = false;
         },
-        openBooking : function() {
+        openBooking : function(value) {
             this.isBook = true;
+            this.little_day = value;
+            // alert(value);
         },
         order() {
             this.$axios.$post('add_queue', {

@@ -55,7 +55,7 @@
                             | {{ $moment().format('YYYY') - service.since }} Tahun
                         h6.f10
                             span.mr-5(class="ti-wallet")
-                            | Mulai dari Rp. {{ formatPrice(service.price) }}
+                            | Mulai Rp. {{ formatPrice(service.price) }}
                         h6.f10
                             span.mr-5(class="ti-alarm-clock")
                             span.fn-10(v-for="schedule in service.schedules") {{ schedule.day }} &nbsp;
