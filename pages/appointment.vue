@@ -45,10 +45,10 @@
                 //-                     label.radio(:for='item')
                 //-                         | {{ item }}
             h6.f12 Pilih Keterangan (lebih dari 1)
-            .group-checkbox.gap-2
+            .group-checkbox
                 button.button(:class="{'is-tosca': complaints.findIndex(item => item === reason.title) !== -1}")(v-for="(reason, $index) in snapshot.reasons" @click="addComplaint(reason.title, $index)") {{ reason.title }}
             .btn-send.gap-2
-                button.button.is-tosca.is-fullwidth.is-rounded(@click="order()" v-if="complaints.length && date !== ''")
+                button.button.is-tosca.is-fullwidth.is-rounded(@click="openBooking()" v-if="complaints.length && date !== ''")
                     span.mr-5(class="ti-calendar")
                     | Kirim
             .pre-modal
@@ -60,6 +60,19 @@
                             div.gap-1
                                 button.mr-5.button.is-danger.is-full(@click="closePremium(); premium = ''") batal
                                 button.ml-5.button.is-success.is-full(@click="closePremium()") Lanjutkan
+            .confirm-modal
+                .modal.ph2(v-bind:class="{'is-active':isBook}")
+                    .modal-background
+                    .modal-card
+                        .modal-card-head
+                            h6.modal-card-title Prediksi Waktu
+                        .modal-card-body.body-modal
+                            h3.has-text-weight-semibold {{ date | moment }}
+                            h1.has-text-weight-bold {{ $date | times }} 
+                            h6.f12  Apakah anda akan melanjutkan ?
+                            div.gap-1
+                                button.mr-5.button.is-tosca.is-outlined.is-full(@click="closeBooking()") Tidak
+                                button.ml-5.button.is-tosca.is-full(@click="order()") Lanjut
         BottomNav
                 
 </template>
@@ -90,8 +103,10 @@
     },
     data() {
         return {
+            isBook: false,
             isShow: false,
             snapshot: {},
+            book: {},
             times: [],
             premium: false,
             // snapshot: {
@@ -101,7 +116,7 @@
             isClicked: false,
             favorite: {},
             complaints: [],
-            date: ""
+            date: "",
         }
     },
     computed: {
@@ -114,8 +129,14 @@
     },
     methods: {
         formatPrice(value) {
-            let val = (value/1).toFixed(2).replace('.', ',')
+            let val = (value/1).toFixed(0).replace('.')
             return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
+        },
+        moment: function () {
+            return moment();
+        },
+        times: function () {
+            return times();
         },
         addComplaint(complaint, id) {
             let find = this.complaints.find(item => item === complaint);
@@ -184,6 +205,12 @@
             //     }
             // })
         },
+        closeBooking: function() {
+            this.isBook = false;
+        },
+        openBooking : function() {
+            this.isBook = true;
+        },
         order() {
             this.$axios.$post('add_queue', {
                 premium: this.premium,
@@ -199,12 +226,29 @@
             });
             // window.location.href = "https://api.whatsapp.com/send?phone=6288906310398&text=Saya booking, keluhan saya "+this.complaints.join(', ');
         }
+    },
+    filters: {
+        moment: function (date) {
+            return moment(date).format('ddd, Do MMMM YYYY');
+        },
+        times: function(date) {
+            return moment(date).format('h:mm');
+        },
+        dates: function(date) {
+            return moment(date).format('Do');
+        },
     }
 }
 </script>
 
 <style lang="sass" scoped> 
     @import '~/assets/sass/style.sass'
+
+    .hidden
+        display: none
+    
+    .showed
+        display: block
 
     .sec-tosca
         background-color: $tosca
@@ -342,6 +386,28 @@
             .body-modal 
                 border-radius: 6px
                 text-align: center !important
+
+    .confirm-modal 
+        .modal-card 
+            width: 85%
+           
+            .modal-card-head
+                background: white
+                text-align: center
+                display: flex
+                position: center
+                border-top-left-radius: 0px
+                border-top-right-radius: 0px
+
+                .modal-card-title
+                    font-size: 18px
+                    font-weight: 600
+                    
+            .modal-card-body 
+                text-align: center !important
+
+                button
+                    width: 48%
    
     .title-service
         font-size: 16pt

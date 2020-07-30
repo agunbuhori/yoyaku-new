@@ -43,7 +43,7 @@ export default {
     transform: translateX(-50%);
     width: 100%;
     max-width: 768px;
-    z-index: 99;
+    z-index: 2;
     padding-top: 7px;
 
     &__link

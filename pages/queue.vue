@@ -47,7 +47,7 @@
                             td.has-text-centered {{ $moment(item.checking_time, "YYYY-MM-DD HH:mm:ss").format("HH:mm") }}
                             //- td {{ $moment(snapshot.service.schedules[0].time_start, "HH:mm:ss").add(15*$index, 'minutes').format("HH:mm") }}
                             //- td {{ $moment().format('YYYY-MM-DD') < item.checking_time ? "Booked" : item.status }}
-                            td.has-text-centered {{ item.status }}
+                            td.has-text-centered {{ item.status | capitalize }}
             .premium-modal
                 .modal.ph2(v-bind:class="{'is-active':isShow}")
                     .modal-background
@@ -79,7 +79,7 @@
                                 v-bind:star-size="50"
                                 :show-rating="false"
                                 )
-                textarea.textarea.gap-1(placeholder="Tulis kritik dan saran disini" v-model="critic")
+                textarea.textarea.gap-1(maxlength="200" placeholder="Tulis kritik dan saran disini" v-model="critic")
                 .button-submit
                     button.button.btn-save.is-rounded(@click="sendReview()") Kirim Penilaian 
         section.sec-news
@@ -206,6 +206,13 @@ export default {
         }
         
 
+    },
+    filters : {
+        capitalize: function (value) {
+            if (!value) return ''
+            value = value.toString()
+            return value.charAt(0).toUpperCase() + value.slice(1)
+        }
     }
 }
 </script>

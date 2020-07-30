@@ -132,7 +132,7 @@ export default {
         //     }
         // },
         formatPrice(value) {
-            let val = (value/1).toFixed(2).replace('.', ',')
+            let val = (value/1).toFixed(0).replace('.')
             return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
         },
         getCategories() {
@@ -301,7 +301,7 @@ $pd-10: 10px
                     img 
                         margin: 0 auto
                         width: 70%
-                        height: 70%
+                        height: 120px
         .b_two
             width: 65%
 

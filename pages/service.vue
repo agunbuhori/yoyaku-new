@@ -103,7 +103,7 @@ export default {
   },
   methods: {
     formatPrice(value) {
-        let val = (value/1).toFixed(2).replace('.', ',')
+        let val = (value/1).toFixed(0).replace('.')
         return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
     },
     async getSnapshot() {
@@ -187,6 +187,16 @@ export default {
     margin-bottom: $gap2
     z-index: 10
     margin-left: 5%
+    
+@media screen and (min-width: $small)
+  .btn-appointment
+    width: 53%
+    position: fixed
+    bottom: 0
+    left: 0
+    margin-bottom: $gap2
+    z-index: 10
+    margin-left: 25%
 
 
 .title-service

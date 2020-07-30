@@ -19,6 +19,9 @@ export default {
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/images/icon-app.png' },
       { rel: "icon-app", href: '/images/icons/icon-48x48.png' },
+      { rel: "icon-app", sizes: "72x72", href: "/images/icons/icon-72x72.png"},
+      { rel: "icon-app", sizes: "96x96", href: "/images/icons/icon-96x96.png"},
+      { rel: "icon-app",  sizes: "192x192", href: "/images/icons/icon-192x192.png"},
       { rel: "apple-touch-icon", sizes: "72x72", href: "/images/icons/icon-72x72.png"},
       { rel: "apple-touch-icon", sizes: "96x96", href: "/images/icons/icon-96x96.png"},
       { rel: "apple-touch-icon",  sizes: "192x192", href: "/images/icons/icon-192x192.png"},
@@ -107,7 +110,7 @@ export default {
         scope: ['public_profile', 'email', 'user_birthday']
       },
       'laravel.passport': {
-        url: 'https://admin.yoyaku.id/api/social_login',
+        url: 'http://localhost/yoyaku-laravel/public/api/social_login',
         client_id: 1,
         client_secret: 'xUVXhO7nOPQ8Xx9xGUuqdUIEZhTVJBy4K6efkR1g'
       },
@@ -119,12 +122,12 @@ export default {
         endpoints: {
           user: false,
           login: { 
-            url: 'https://admin.yoyaku.id/api/social_login',
+            url: 'http://localhost/yoyaku-laravel/public/api/social_login',
             method: 'post',
             propertyName: 'access_token' 
           },
           logout: {
-            url: 'https://admin.yoyaku.id/api/v1/auth/login',
+            url: 'http://localhost/yoyaku-laravel/public/api/v1/auth/login',
             method: 'post'
           }
         },
