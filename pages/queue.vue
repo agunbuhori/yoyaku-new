@@ -98,15 +98,16 @@
                     .text-title {{ services.name }}
                 carousel.ads-group(items="2" :nav="false")
                     .ads-group__item(v-for="service in services.services")
-                        .ads-group__item__body
-                            .img-ads(v-if="service.premium == 1")
-                                img(src="/images/ads.png")
-                            .main-img
-                                img(:src="service.picture ? service.picture : '/images/default.png'")
-                            h6.has-text-weight-bold {{service.name}}
-                            h6
-                                span(class="ti-star")
-                                |  3.4
+                        nuxt-link(:to="'/service?id='+service.id")
+                            .ads-group__item__body
+                                .img-ads(v-if="service.premium == 1")
+                                    img(src="/images/ads.png")
+                                .main-img
+                                    img(:src="service.picture ? service.picture : '/images/default.png'")
+                                h6.has-text-weight-bold {{service.name}}
+                                h6
+                                    span(class="ti-star")
+                                    |  3.4
 
         
         BottomNav
@@ -416,13 +417,15 @@ $bd-grey: #e5e5e5
                 align-items: center
                 flex-direction: column
                 img
-                    width: 55%
+                    width: 70px
+                    height: 70px
                     border-radius: 50%;
 
             @media screen and (min-width: $small)
                 .main-img
                     img
-                        width: 25%
+                        width: 100px
+                        height: 100px
 
             
 
