@@ -365,7 +365,7 @@ $bd-grey: #e5e5e5
             a
                 font-weight: bold
                 font-size: 12px
-                display: inline-block;
+                display: inline-block
                 color: #000
                 line-height: 13px
                 
@@ -419,7 +419,7 @@ $bd-grey: #e5e5e5
                 img
                     width: 70px
                     height: 70px
-                    border-radius: 50%;
+                    border-radius: 50%
 
             @media screen and (min-width: $small)
                 .main-img
