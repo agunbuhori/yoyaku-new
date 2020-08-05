@@ -92,7 +92,7 @@
                         //- span {{ post.categories }}
                         a(:href="post.link") {{ post.title.rendered.substring(0,30)+".." }}
         section.sec-3
-            div(v-for="services in snapshot.services")
+            div(v-for="services in services")
                 .ads-title
                     img(:src="services.picture")
                     .text-title {{ services.name }}
@@ -105,9 +105,12 @@
                                 .main-img
                                     img(:src="service.picture ? service.picture : '/images/default.png'")
                                 h6.has-text-weight-bold {{service.name}}
-                                h6
+                                h6(v-if="service.rating != '' ")
                                     span(class="ti-star")
-                                    |  3.4
+                                    |  {{ service.rating }}
+                                h6(v-if="service.rating == '' ")
+                                    span(class="ti-star")
+                                    |  -
 
         
         BottomNav
@@ -141,6 +144,7 @@ export default {
             isShow: false,
             isBlock: false,
             posts: [],
+            services: [],
             queue: 0,
             total: 0,
             queues: [],
@@ -163,6 +167,7 @@ export default {
     mounted() {
         // this.getSnapshot();
         this.getPosts();
+        this.getServices();
 
         setInterval(() => {
             this.now = moment().format("dddd, DD MMMM YYYY");
@@ -188,6 +193,17 @@ export default {
                 if (status === 200) {
                     this.posts = data;
                     this.postsLoaded = true;
+                }
+            })
+        },
+        getServices(){
+            this.$axios.get("queue")
+            .then(response => {
+                const {status, data} = response;
+
+                if (status === 200) {
+                    this.services = data.services;
+                    console.log(data.services)
                 }
             })
         },
