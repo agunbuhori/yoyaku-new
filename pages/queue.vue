@@ -47,7 +47,9 @@
                             td.has-text-centered {{ $moment(item.checking_time, "YYYY-MM-DD HH:mm:ss").format("HH:mm") }}
                             //- td {{ $moment(snapshot.service.schedules[0].time_start, "HH:mm:ss").add(15*$index, 'minutes').format("HH:mm") }}
                             //- td {{ $moment().format('YYYY-MM-DD') < item.checking_time ? "Booked" : item.status }}
-                            td.has-text-centered {{ item.status | capitalize }}
+                            td.has-text-centered(v-if="! item.status == 'failed'") {{ item.status | capitalize }}
+                            td.has-text-centered(v-if="item.status == 'failed'") {{ 'Pending' | capitalize }}
+
             .premium-modal
                 .modal.ph2(v-bind:class="{'is-active':isShow}")
                     .modal-background
@@ -309,23 +311,23 @@ $bd-grey: #e5e5e5
 
             .strikeout 
                 color: grey
-                td 
-                    position: relative
-                td 
-                    &::before
-                        content: " "
-                        position: absolute
-                        top: 50%
-                        left: 0
-                        border-bottom: 1px solid grey
-                        width: 100%
+                // td 
+                //     position: relative
+                // td 
+                //     &::before
+                //         content: " "
+                //         position: absolute
+                //         top: 50%
+                //         left: 0
+                //         border-bottom: 1px solid grey
+                //         width: 100%
 
 .sec-queue
     padding-left: $gap2
     padding-right: $gap2
 
 .text-failed 
-    text-decoration: line-through
+    // text-decoration: line-through
     // color: grey
 .review
     padding-top: 0px
