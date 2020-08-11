@@ -205,7 +205,6 @@ export default {
 
                 if (status === 200) {
                     this.services = data.services;
-                    console.log(data.services)
                 }
             })
         },

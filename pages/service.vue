@@ -56,8 +56,8 @@
     .btn-appointment
       nuxt-link(:to="'/appointment?id=' + snapshot.id")
         button.button.is-tosca.is-medium.is-fullwidth.is-rounded
-          span.mr-5.ti-calendar
-          | Buat Janji
+            span.mr-5.ti-calendar
+            | Buat Janji
 </template>
 
 <script>
@@ -91,6 +91,7 @@ export default {
       favorite: {},
       liked: false,
       isHide: true,
+      profiles:{},
     };
   },
   computed: {
@@ -100,8 +101,22 @@ export default {
   },
   async mounted() {
     // await this.getSnapshot();
+    await this.getProfile();
   },
   methods: {
+    check(){
+      alert("lengkapi profile")
+      window.href = ""
+    },
+    async getProfile(){
+      if (this.$auth.loggedIn)
+        await this.$axios.$get('profile')
+        .then(response => {
+            const { name, email, whatsapp, age, gender, member, address, status} = response;
+              console.log(member);
+              this.profiles = member;
+        })
+    },
     formatPrice(value) {
         let val = (value/1).toFixed(0).replace('.')
         return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")

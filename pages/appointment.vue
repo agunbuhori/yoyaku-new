@@ -109,6 +109,7 @@
             snapshot: {},
             book: {},
             times: [],
+            profiles: {},
             premium: false,
             // snapshot: {
             //     group: {}
@@ -128,6 +129,7 @@
     },
     async mounted() {
         // await this.getSnapshot();
+        this.getProfile();
     },
     methods: {
         formatPrice(value) {
@@ -229,7 +231,16 @@
                     this.$router.push('/queue');
             });
             // window.location.href = "https://api.whatsapp.com/send?phone=6288906310398&text=Saya booking, keluhan saya "+this.complaints.join(', ');
-        }
+        },
+        getProfile() {
+            //   if (this.$auth.loggedIn)
+            //     this.$axios.$get('profile')
+            //     .then(response => {
+            //         const { name, email, whatsapp, age, gender, member, address, status} = response;
+            //         console.log(response.member);
+            //         this.profiles = response.member;
+            //     })
+        },
     },
     filters: {
         moment: function (date) {
