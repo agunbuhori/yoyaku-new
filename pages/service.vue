@@ -53,17 +53,26 @@
           nuxt-link(:to="'/comment?id='+snapshot.id") 
             h5.has-text-right.text-muted  Lihat Komentar 
               span.ti-angle-right
-    .btn-appointment
-      nuxt-link(:to="'/appointment?id=' + snapshot.id")
-        button.button.is-tosca.is-medium.is-fullwidth.is-rounded
-            span.mr-5.ti-calendar
-            | Buat Janji
+    .btn-appointment(@click="check()")
+      button.button.is-tosca.is-medium.is-fullwidth.is-rounded
+          span.mr-5.ti-calendar
+          | Buat Janji
+    .check-modal
+      .modal.ph2(v-bind:class="{'is-active':isHide}")
+          .modal-background
+          .modal-card
+              .modal-card-body.body-modal
+                  h4.has-text-weight-bold.centered  Harap Lengkapi profil terlebih dahulu
+                  div.gap-1
+                    nuxt-link(to="/profile")
+                      button.mr-10.button.is-tosca.is-fullwidth Ke halaman Profil
 </template>
 
 <script>
 import StarRating from "vue-star-rating";
 import BottomNav from "~/components/BottomNav";
 import Header from "~/components/Header";
+import member from '~/middleware/member';
 
 export default {
   async asyncData({ $axios, params, store, route }) {
@@ -90,8 +99,7 @@ export default {
       isClicked: false,
       favorite: {},
       liked: false,
-      isHide: true,
-      profiles:{},
+      isHide: false,
     };
   },
   computed: {
@@ -101,21 +109,18 @@ export default {
   },
   async mounted() {
     // await this.getSnapshot();
-    await this.getProfile();
   },
   methods: {
     check(){
-      alert("lengkapi profile")
-      window.href = ""
-    },
-    async getProfile(){
-      if (this.$auth.loggedIn)
-        await this.$axios.$get('profile')
-        .then(response => {
-            const { name, email, whatsapp, age, gender, member, address, status} = response;
-              console.log(member);
-              this.profiles = member;
-        })
+      this.$axios.$get('profile')
+      .then(response => {
+        if(response.member.gender || response.member.age || response.member.whatsapp || response.member.address  != null){
+          this.isHide = false;
+          window.location.href = '/appointment?id=' + this.$route.query.id;
+        }else {
+          this.isHide = true;
+        }
+      })
     },
     formatPrice(value) {
         let val = (value/1).toFixed(0).replace('.')
