@@ -47,7 +47,7 @@
                             td.has-text-centered {{ $moment(item.checking_time, "YYYY-MM-DD HH:mm:ss").format("HH:mm") }}
                             //- td {{ $moment(snapshot.service.schedules[0].time_start, "HH:mm:ss").add(15*$index, 'minutes').format("HH:mm") }}
                             //- td {{ $moment().format('YYYY-MM-DD') < item.checking_time ? "Booked" : item.status }}
-                            td.has-text-centered(v-if="! item.status == 'failed'") {{ item.status | capitalize }}
+                            td.has-text-centered(v-if="item.status != 'failed'") {{ item.status | capitalize }}
                             td.has-text-centered(v-if="item.status == 'failed'") {{ 'Pending' | capitalize }}
 
             .premium-modal
