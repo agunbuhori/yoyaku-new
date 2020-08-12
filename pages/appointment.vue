@@ -20,15 +20,15 @@
                 h5.f14-service.gap-2 Biaya Mulai Rp. {{ formatPrice(snapshot.price) }}
         section.sec-2
             .desc-service
-                h5.f14 Tanggal Tersedia
+                h5.f14 Tanggal Tersedia 
                 .select-day.gap-1
                     .queue-day(v-for="(date, $index) in snapshot.dates" :class="! date.available ? 'unactive' : ''")
                         .head-select
-                            h4 {{ $moment($index).format('dd') }}
+                            h4 {{ $moment($index).format('dd') }} 
                         .body-select
                             p.f12 {{ $moment($index).format('DD') }}
                             p
-                                input(type='radio' name="date" :disabled="! date.available" @click="postDate($index)")
+                                input(type='radio' name="date" :disabled="! date.available" @click="postDate($index, date.start)")
                             p.f12 {{ date.total }}
                             p Antrian
                 //- .premium-feature
@@ -68,8 +68,8 @@
                             h6.modal-card-title Prediksi Waktu
                         .modal-card-body.body-modal
                             h3.has-text-weight-semibold {{ date | moment }}
-                            div(v-for="schedule in snapshot.schedules")
-                                h1.has-text-weight-bold(v-if="schedule.little_day == little_day") {{ schedule.finish_time }} 
+                            div
+                                h1.has-text-weight-bold {{ time_start }} 
                             h6.f12  Apakah anda akan melanjutkan ?
                             div.gap-1
                                 button.mr-5.button.is-tosca.is-outlined.is-full(@click="closeBooking()") Tidak
@@ -109,6 +109,7 @@
             snapshot: {},
             book: {},
             times: [],
+            profiles: {},
             premium: false,
             // snapshot: {
             //     group: {}
@@ -118,7 +119,8 @@
             favorite: {},
             complaints: [],
             date: "",
-            little_day: ""
+            time_start: "",
+            little_day: "",
         }
     },
     computed: {
@@ -187,8 +189,9 @@
         inArray(item) {
             return this.unavailables.indexOf(item) == '-1';
         },
-        postDate(date){
+        postDate(date, time_start){
             this.date = date;
+            this.time_start = time_start;
             // this.date = date;
             // this.$axios.post("service", {
             //     id: this.$route.query.id,
@@ -229,7 +232,7 @@
                     this.$router.push('/queue');
             });
             // window.location.href = "https://api.whatsapp.com/send?phone=6288906310398&text=Saya booking, keluhan saya "+this.complaints.join(', ');
-        }
+        },
     },
     filters: {
         moment: function (date) {
