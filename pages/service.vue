@@ -64,7 +64,7 @@
               .modal-card-body.body-modal
                   h4.has-text-weight-bold.centered  Harap Lengkapi profil terlebih dahulu
                   div.gap-1
-                    nuxt-link(to="/profile")
+                    nuxt-link(to="/edit_profile")
                       button.mr-10.button.is-tosca.is-fullwidth Ke halaman Profil
 </template>
 
