@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Yoyaku</string>
+    <string name="title_activity_main">Yoyaku</string>
+    <string name="package_name">id.yoyaku.m</string>
+    <string name="custom_url_scheme">id.yoyaku.m</string>
+</resources>

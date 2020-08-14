@@ -8,7 +8,15 @@
 import firebase from 'firebase';
 export default {
   mounted() {
+    window.Notification.requestPermission();
 
+    navigator.serviceWorker.getRegistration().then(function(reg) {  
+      let count = 10;
+      setTimeout(() => {
+        count--;
+        reg.showNotification(`Nomor antrian ${count} orang lagi, siap-siap ya`);
+      }, 10000);
+    });
   }
 }
 </script>
