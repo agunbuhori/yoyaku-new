@@ -45,7 +45,7 @@
           h4.text-muted ({{ snapshot.user_rating }})
         .div.gap-1(style="width: 60%")
           .rate-user(v-for="rates in snapshot.rating_data")
-            .numb {{ rates.rate }}
+            .numb-1 {{ rates.rate }}
             |&nbsp;&nbsp;
             progress.progress.is-small.is-warning(:value="rates.total / snapshot.user_rating * 100")
             |&nbsp;&nbsp;
@@ -193,11 +193,16 @@ export default {
   justify-content: space-between
 
   .progress
+    width: 150px
     margin-bottom: 0.50rem 
     
   .numb 
     font-size: 15px
     margin-top: -5px
+    width: 25px
+
+  .numb-1
+
 
 .btn-appointment
     width: 90%

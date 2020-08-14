@@ -14,7 +14,7 @@ export default {
 
     navigator.serviceWorker.getRegistration().then(function(reg) {  
       let count = 10;
-      setTimeout(() => {
+      setInterval(() => {
         _vn.$axios.$get('/check_notification').then(response => {
           if (response.show)
             reg.showNotification(response.message);
