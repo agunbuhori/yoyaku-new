@@ -21,6 +21,10 @@ export default {
         })
       }, 10000);
     });
+    self.addEventListener('notificationclick', function (event) {
+    event.notification.close();
+    clients.openWindow("https://m.yoyaku.id/queue");
+  });
   }
 }
 </script>
