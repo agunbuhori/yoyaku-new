@@ -10,11 +10,15 @@ export default {
   mounted() {
     window.Notification.requestPermission();
 
+    const _vn = this;
+
     navigator.serviceWorker.getRegistration().then(function(reg) {  
       let count = 10;
       setTimeout(() => {
-        count--;
-        reg.showNotification(`Nomor antrian ${count} orang lagi, siap-siap ya`);
+        _vn.$axios.$get('/check_notification').then(response => {
+          if (response.show)
+            reg.showNotification(response.message);
+        })
       }, 10000);
     });
   }
