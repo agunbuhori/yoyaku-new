@@ -114,7 +114,7 @@ export default {
     check(){
       this.$axios.$get('profile')
       .then(response => {
-        if(response.member.gender != null || response.member.age != null || response.member.whatsapp != null || response.member.address  != null){
+        if(response.member.gender != null && response.member.age != null && response.member.whatsapp != null && response.member.address  != null){
           this.isHide = false;
           window.location.href = '/appointment?id=' + this.$route.query.id;
         }else {
