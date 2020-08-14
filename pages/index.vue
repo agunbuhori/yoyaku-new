@@ -52,7 +52,7 @@ export default {
     data() {
         return {
             snapshot: {},
-            // snapshotLoaded: false,
+            snapshotLoaded: true,
             categories: [],
             activeCategory: 0,
             posts: [],
