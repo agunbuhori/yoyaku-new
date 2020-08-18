@@ -10,6 +10,7 @@ export const state = () => ({
     }
 });
 
+
 export const mutations = {
     setMember(state, data) {
         state.member = data;

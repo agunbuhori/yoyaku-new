@@ -106,8 +106,7 @@ export default {
     //   }
     // },
     async check(e) {
-      console.log(this.rateTipe);
-        const data = await this.$axios.get("service/02LDQ0", {
+        const data = await this.$axios.get("service/" + this.snapshot.id, {
           params: {
             rate: this.rateTipe
           },

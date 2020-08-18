@@ -73,7 +73,7 @@ export default {
     methods: {
         filterGroup(group_id) {
             location.href = '/search?group='+ group_id;
-            this.filter = filter;
+            // this.filter = filter;
         },
         async getSnapshot() {
             await this.$axios.get("home")
