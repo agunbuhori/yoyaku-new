@@ -70,7 +70,11 @@ import Header from '~/components/Header';
 import carousel from 'v-owl-carousel';
 
 export default {
-    async asyncData({$axios, params, store}, query = {lat: store.state.location.latitude, long: store.state.location.longitude}) {
+    async asyncData({$axios, route, params, store}, query = {
+            lat: store.state.location.latitude, 
+            long: store.state.location.longitude,
+            group_id: route.query.group
+        }) {
         const data = await $axios.$get('services', {
             params: query
         });
