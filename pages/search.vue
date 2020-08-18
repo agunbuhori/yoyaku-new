@@ -16,17 +16,15 @@
                     .control
                         button(:class="{'active': category == filter.id}" v-for="filter in groups" @click="category = filter.id") {{ filter.name }}
                 h5.has-text-weight-semibold.mt-10 Harga
-                .filter-price
-                    .select.is-fullwidth
-                        select(v-model="minmax")
-                            option(value="1") 10.000 - 50.0000
-                            option(value="2") 50.000 - 300.0000
                 .filtered-two.mg-2
                     .control
-                        button(:class="{'active': filter === 'nearby'}" @click="filterResult('nearby')") Terdekat
+                        button(:class="{'active': filter === 'low'}" @click="filterResult('low')") Rp. 10.000 - Rp. 50.000
+                        button(:class="{'active': filter === 'high'}" @click="filterResult('high')") Rp. 50.000 - Rp. 300.000
+                .filtered-two.mg-2
+                    .control
                         button(:class="{'active': filter === 'fastest'}" @click="filterResult('fastest')") Antrian Tercepat
-                        button(:class="{'active': filter === 'female_doctor'}" @click="filterResult('female_doctor')") Dokter Wanita
-                        button(:class="{'active': filter === 'male_doctor'}" @click="filterResult('male_doctor')") Dokter Pria
+                        button(:class="{'active': filter === 'female'}" @click="filterResult('female')") Dokter Wanita
+                        button(:class="{'active': filter === 'male'}" @click="filterResult('male')") Dokter Pria
                     
                 button(@click="snapshot.services = []; getSnapshot()").button.is-fullwidth.is-rounded.is-tosca.mt-10 Cari
         section.sec-2
@@ -99,7 +97,7 @@ export default {
             lat: "",
             long: "",
             q: "",
-            minmax: 1,
+            minmax: '',
             favorites: []
         }
     },
@@ -234,7 +232,7 @@ $pd-10: 10px
         background: #f5f5f5
         border-radius: 5px
         overflow-y: scroll
-        height: 8rem
+        height: auto
         border: 1px solid #ddd
         .control 
             padding: $gap1
@@ -257,14 +255,7 @@ $pd-10: 10px
                     background-color: $tosca
                     color: white
                     border-radius: 5px
-        
-    .filter-price 
-        background: #f5f5f5
-        border-radius: 5px
-        border: 1px solid #ededed
-        justify-content: space-between
-        height: auto
-        padding: 10px
+
 
 .groups-service
     .service_box

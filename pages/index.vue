@@ -11,9 +11,10 @@
 
                 .specialis
                     .menus
-                        nuxt-link.item.centered.dir-column(v-for="(group, $index) in snapshot.groups" :to="'/search?group='+group.id" :key="$index")
-                            img(:src="group.picture")
-                            span {{ group.name }}
+                        div(v-for="(group, $index) in snapshot.groups")
+                            .item.centered.dir-column(@click="filterGroup(group.id)")
+                                img(:src="group.picture")
+                                span {{ group.name }}
         section.sec-1
             h2.has-text-weight-bold Berita
             .categories
@@ -52,7 +53,7 @@ export default {
     data() {
         return {
             snapshot: {},
-            // snapshotLoaded: false,
+            snapshotLoaded: true,
             categories: [],
             activeCategory: 0,
             posts: [],
@@ -71,6 +72,10 @@ export default {
         this.getPosts();
     },
     methods: {
+        filterGroup(group_id) {
+            location.href = '/search?group='+ group_id;
+            // this.filter = filter;
+        },
         async getSnapshot() {
             await this.$axios.get("home")
             .then(response => {

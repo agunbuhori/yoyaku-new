@@ -45,11 +45,11 @@
           h4.text-muted ({{ snapshot.user_rating }})
         .div.gap-1(style="width: 60%")
           .rate-user(v-for="rates in snapshot.rating_data")
-            .numb {{ rates.rate }}
+            .numb-1 {{ rates.rate }}
             |&nbsp;&nbsp;
-            progress.progress.is-small.is-warning(:value="rates.total" :max="rates.total * 2")
+            progress.progress.is-small.is-warning(:value="rates.total / snapshot.user_rating * 100" :max="100")
             |&nbsp;&nbsp;
-            .numb.text-muted {{ rates.total }}
+            .numb.text-muted {{ rates.total / snapshot.user_rating * 100 }}%
           nuxt-link(:to="'/comment?id='+snapshot.id") 
             h5.has-text-right.text-muted  Lihat Komentar 
               span.ti-angle-right
@@ -64,7 +64,7 @@
               .modal-card-body.body-modal
                   h4.has-text-weight-bold.centered  Harap Lengkapi profil terlebih dahulu
                   div.gap-1
-                    nuxt-link(to="/profile")
+                    nuxt-link(to="/update")
                       button.mr-10.button.is-tosca.is-fullwidth Ke halaman Profil
 </template>
 
@@ -114,7 +114,7 @@ export default {
     check(){
       this.$axios.$get('profile')
       .then(response => {
-        if(response.member.gender || response.member.age || response.member.whatsapp || response.member.address  != null){
+        if(response.member.gender != null && response.member.age != null && response.member.whatsapp != null && response.member.address  != null){
           this.isHide = false;
           window.location.href = '/appointment?id=' + this.$route.query.id;
         }else {
@@ -193,11 +193,16 @@ export default {
   justify-content: space-between
 
   .progress
+    width: 150px
     margin-bottom: 0.50rem 
     
   .numb 
     font-size: 15px
     margin-top: -5px
+    width: 25px
+
+  .numb-1
+
 
 .btn-appointment
     width: 90%

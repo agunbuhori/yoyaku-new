@@ -16,9 +16,9 @@
         .rate-user(v-for="rates in snapshot.rating_data")
           .numb {{ rates.rate }}
           |&nbsp;&nbsp;
-          progress.progress.is-small.is-warning(:value="rates.total" :max="rates.total * 2")
+          progress.progress.is-small.is-warning(:value="rates.total / snapshot.user_rating * 100" :max="100")
           |&nbsp;&nbsp;
-          .numb.text-muted {{ rates.total }}
+          .numb.text-muted {{ rates.total / snapshot.user_rating * 100 }}%
   section.sec-2
     .comment(v-for="comment in snapshot.comments")
       h5.has-text-weight-semibold {{ comment.user }}
@@ -108,11 +108,13 @@ export default {
   justify-content: space-between
 
   .progress
-    margin-bottom: 0.75rem 
+    width: 150px
+    margin-bottom: 0.50rem 
     
   .numb 
     font-size: 15px
     margin-top: -5px
+    width: 25px
 
 .comment 
   margin-top: $gap2
