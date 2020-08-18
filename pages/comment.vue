@@ -2,32 +2,32 @@
 .wrapper
   Header
   section.sec-1(v-if="snapshotLoaded") 
-    .total-rate(v-for="starRate in rate")
+    .total-rate
       .checkbox-feature
-        input#1(type='checkbox' v-model="tipeRate" value="1")
+        input#1(type='checkbox' v-model="tipeRate" value="1" @click="getStar(1)")
         label.checkbox(for='1')
           span.ti-star 
           h6.title-rate 1 (100) 
-      //- .checkbox-feature
-      //-   input#2(type='checkbox' v-model="tipeRate" value="2")
-      //-   label.checkbox(for='2')
-      //-     span.ti-star
-      //-     h6.title-rate 2 (100) 
-      //- .checkbox-feature
-      //-   input#3(type='checkbox' v-model="tipeRate" value="3")
-      //-   label.checkbox(for='3')
-      //-     span.ti-star
-      //-     h6.title-rate 3 (100) 
-      //- .checkbox-feature
-      //-   input#4(type='checkbox' v-model="tipeRate"  value="4")
-      //-   label.checkbox(for='4')
-      //-     span.ti-star
-      //-     h6.title-rate 4 (100) 
-      //- .checkbox-feature
-      //-   input#5(type='checkbox' v-model="tipeRate" value="5")
-      //-   label.checkbox(for='5')
-      //-     span.ti-star
-      //-     h6.title-rate 5 (100) 
+      .checkbox-feature
+        input#2(type='checkbox' v-model="tipeRate" value="2")
+        label.checkbox(for='2')
+          span.ti-star
+          h6.title-rate 2 (100) 
+      .checkbox-feature
+        input#3(type='checkbox' v-model="tipeRate" value="3")
+        label.checkbox(for='3')
+          span.ti-star
+          h6.title-rate 3 (100) 
+      .checkbox-feature
+        input#4(type='checkbox' v-model="tipeRate"  value="4")
+        label.checkbox(for='4')
+          span.ti-star
+          h6.title-rate 4 (100) 
+      .checkbox-feature
+        input#5(type='checkbox' v-model="tipeRate" value="5")
+        label.checkbox(for='5')
+          span.ti-star
+          h6.title-rate 5 (100) 
     .rate-user
       .div.has-text-centered
         .f30.has-text-weight-semibold {{ snapshot.rating }}
@@ -88,11 +88,7 @@ export default {
       isClicked: false,
       favorite: {},
       liked: false,
-      rateTipe: [{
-        star : '1'
-      }, {
-        star : '2'
-      }]
+      rateTipe: []
     };
   },
   computed: {
@@ -104,6 +100,9 @@ export default {
     // await this.getSnapshot();
   },
   methods: {
+    getStar(star){
+    
+    },
      check: function(e) {
       if (e.target.checked) {
         console.log(e.target.value)
