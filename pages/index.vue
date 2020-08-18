@@ -8,7 +8,6 @@
 
             section.sec-home
                 h2.section-title Spesialis
-
                 .specialis
                     .menus
                         div(v-for="(group, $index) in snapshot.groups")
@@ -74,7 +73,7 @@ export default {
     methods: {
         filterGroup(group_id) {
             location.href = '/search?group='+ group_id;
-            // this.filter = filter;
+            this.filter = filter;
         },
         async getSnapshot() {
             await this.$axios.get("home")

@@ -2,6 +2,32 @@
 .wrapper
   Header
   section.sec-1(v-if="snapshotLoaded") 
+    .total-rate(v-for="starRate in rate")
+      .checkbox-feature
+        input#1(type='checkbox' v-model="tipeRate" value="1")
+        label.checkbox(for='1')
+          span.ti-star 
+          h6.title-rate 1 (100) 
+      //- .checkbox-feature
+      //-   input#2(type='checkbox' v-model="tipeRate" value="2")
+      //-   label.checkbox(for='2')
+      //-     span.ti-star
+      //-     h6.title-rate 2 (100) 
+      //- .checkbox-feature
+      //-   input#3(type='checkbox' v-model="tipeRate" value="3")
+      //-   label.checkbox(for='3')
+      //-     span.ti-star
+      //-     h6.title-rate 3 (100) 
+      //- .checkbox-feature
+      //-   input#4(type='checkbox' v-model="tipeRate"  value="4")
+      //-   label.checkbox(for='4')
+      //-     span.ti-star
+      //-     h6.title-rate 4 (100) 
+      //- .checkbox-feature
+      //-   input#5(type='checkbox' v-model="tipeRate" value="5")
+      //-   label.checkbox(for='5')
+      //-     span.ti-star
+      //-     h6.title-rate 5 (100) 
     .rate-user
       .div.has-text-centered
         .f30.has-text-weight-semibold {{ snapshot.rating }}
@@ -18,7 +44,7 @@
           |&nbsp;&nbsp;
           progress.progress.is-small.is-warning(:value="rates.total / snapshot.user_rating * 100" :max="100")
           |&nbsp;&nbsp;
-          .numb.text-muted {{ rates.total / snapshot.user_rating * 100 }}%
+          .numb.text-muted {{ (rates.total / snapshot.user_rating * 100).toFixed() }}%
   section.sec-2
     .comment(v-for="comment in snapshot.comments")
       h5.has-text-weight-semibold {{ comment.user }}
@@ -43,8 +69,7 @@ export default {
     const { latitude, longitude } = store.state.location;
     const snapshot = await $axios.$get("service/" + route.query.id, {
       params: {
-        lat: latitude,
-        long: longitude,
+        rate: []
       },
     });
 
@@ -63,6 +88,11 @@ export default {
       isClicked: false,
       favorite: {},
       liked: false,
+      rateTipe: [{
+        star : '1'
+      }, {
+        star : '2'
+      }]
     };
   },
   computed: {
@@ -74,6 +104,11 @@ export default {
     // await this.getSnapshot();
   },
   methods: {
+     check: function(e) {
+      if (e.target.checked) {
+        console.log(e.target.value)
+      }
+    },
     formatPrice(value) {
         let val = (value/1).toFixed(2).replace('.', ',')
         return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
@@ -102,7 +137,44 @@ export default {
 
 <style lang="sass" scoped> 
 @import '~/assets/sass/style.sass';
-    
+
+.total-rate
+  display: flex
+  justify-content: space-between
+  margin-bottom: $gap2
+
+  .checkbox-feature 
+    width: 100%
+    border-radius: 4px
+    margin-left: 4px
+    margin-right: 4px
+
+    .ti-star 
+      font-size: 30px
+      color: $yellow
+
+    .title-rate
+      font-weight: 600
+      font-size: 14px
+
+    label.checkbox 
+      display: inline-block
+      cursor: pointer
+      padding: 10px 0px
+      width: 100%
+      height: 80px
+      text-align: center
+      border: 1px solid #ccc
+      color: #000
+      border-radius: 4px
+
+    input[type=checkbox]:checked + label.checkbox 
+        border: 1px solid #ccc
+        background: $grey
+
+    input[type=checkbox] 
+        display: none
+      
 .rate-user
   display: flex
   justify-content: space-between

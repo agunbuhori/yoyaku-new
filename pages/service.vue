@@ -49,7 +49,7 @@
             |&nbsp;&nbsp;
             progress.progress.is-small.is-warning(:value="rates.total / snapshot.user_rating * 100" :max="100")
             |&nbsp;&nbsp;
-            .numb.text-muted {{ rates.total / snapshot.user_rating * 100 }}%
+            .numb.text-muted {{ (rates.total / snapshot.user_rating * 100).toFixed() }}%
           nuxt-link(:to="'/comment?id='+snapshot.id") 
             h5.has-text-right.text-muted  Lihat Komentar 
               span.ti-angle-right
@@ -63,9 +63,10 @@
           .modal-card
               .modal-card-body.body-modal
                   h4.has-text-weight-bold.centered  Harap Lengkapi profil terlebih dahulu
-                  div.gap-1
+                  .group-check.gap-1
                     nuxt-link(to="/update")
-                      button.mr-10.button.is-tosca.is-fullwidth Ke halaman Profil
+                      button.mr-10.button.is-tosca.w50 Isi Profil
+                    button.ml-10.button.is-danger.w50(@click="closeProfile()") Batal
 </template>
 
 <script>
@@ -111,6 +112,9 @@ export default {
     // await this.getSnapshot();
   },
   methods: {
+    closeProfile: function(){
+      this.isHide = false;
+    },
     check(){
       this.$axios.$get('profile')
       .then(response => {
@@ -259,4 +263,13 @@ export default {
 .d-flex
     display: flex
     justify-content: space-around
+
+.group-check
+    display: flex
+    justify-content: center
+    .w50 
+      width: 120px
+      margin-left: 5px
+      margin-right: 5px
+
 </style>

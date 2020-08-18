@@ -98,7 +98,7 @@ export default {
             long: "",
             q: "",
             minmax: '',
-            favorites: []
+            favorites: [],
         }
     },
     computed: {
