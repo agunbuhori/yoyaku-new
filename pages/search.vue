@@ -84,6 +84,7 @@ export default {
 
         return { snapshot, groups };
     },
+    middleware: "member",
     components: {
         BottomNav,
         carousel,

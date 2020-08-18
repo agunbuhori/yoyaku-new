@@ -64,9 +64,9 @@
               .modal-card-body.body-modal
                   h4.has-text-weight-bold.centered  Harap Lengkapi profil terlebih dahulu
                   .group-check.gap-1
+                    button.ml-10.button.is-light.w50(@click="closeProfile()") Batal
                     nuxt-link(to="/update")
                       button.mr-10.button.is-tosca.w50 Isi Profil
-                    button.ml-10.button.is-danger.w50(@click="closeProfile()") Batal
 </template>
 
 <script>
