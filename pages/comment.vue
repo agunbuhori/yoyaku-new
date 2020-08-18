@@ -4,30 +4,30 @@
   section.sec-1(v-if="snapshotLoaded") 
     .total-rate
       .checkbox-feature
-        input#1(type='checkbox' v-model="tipeRate" value="1" @click="getStar(1)")
+        input#1(type='checkbox' v-model="rateTipe" value="1" @change="check($event)")
         label.checkbox(for='1')
           span.ti-star 
-          h6.title-rate 1 (100) 
+          h6.title-rate 1 ({{ snapshot.rating_data[0].total }})
       .checkbox-feature
-        input#2(type='checkbox' v-model="tipeRate" value="2")
+        input#2(type='checkbox' v-model="rateTipe" value="2" @change="check($event)")
         label.checkbox(for='2')
           span.ti-star
-          h6.title-rate 2 (100) 
+          h6.title-rate 2 ({{ snapshot.rating_data[1].total }})
       .checkbox-feature
-        input#3(type='checkbox' v-model="tipeRate" value="3")
+        input#3(type='checkbox' v-model="rateTipe" value="3" @change="check($event)")
         label.checkbox(for='3')
           span.ti-star
-          h6.title-rate 3 (100) 
+          h6.title-rate 3 ({{ snapshot.rating_data[2].total }})
       .checkbox-feature
-        input#4(type='checkbox' v-model="tipeRate"  value="4")
+        input#4(type='checkbox' v-model="rateTipe" value="4" @change="check($event)")
         label.checkbox(for='4')
           span.ti-star
-          h6.title-rate 4 (100) 
+          h6.title-rate 4 ({{ snapshot.rating_data[3].total }})
       .checkbox-feature
-        input#5(type='checkbox' v-model="tipeRate" value="5")
+        input#5(type='checkbox' v-model="rateTipe" value="5" @change="check($event)")
         label.checkbox(for='5')
           span.ti-star
-          h6.title-rate 5 (100) 
+          h6.title-rate 5 ({{ snapshot.rating_data[4].total }})
     .rate-user
       .div.has-text-centered
         .f30.has-text-weight-semibold {{ snapshot.rating }}
@@ -88,7 +88,7 @@ export default {
       isClicked: false,
       favorite: {},
       liked: false,
-      rateTipe: []
+      rateTipe: [],
     };
   },
   computed: {
@@ -100,25 +100,23 @@ export default {
     // await this.getSnapshot();
   },
   methods: {
-    getStar(star){
-    
-    },
-     check: function(e) {
-      if (e.target.checked) {
-        console.log(e.target.value)
-      }
+    // check: function(e) {
+    //   if (e.target.checked) {
+    //     console.log(e.target.value)
+    //   }
+    // },
+    async check(e) {
+      console.log(this.rateTipe);
+        const data = await this.$axios.get("service/02LDQ0", {
+          params: {
+            rate: this.rateTipe
+          },
+        });
+      this.snapshot = data.data;
     },
     formatPrice(value) {
         let val = (value/1).toFixed(2).replace('.', ',')
         return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
-    },
-    async getSnapshot() {
-      await this.$axios
-        .$get("service/" + this.$route.query.id)
-        .then((response) => {
-          this.snapshotLoaded = true;
-          this.snapshot = response;
-        });
     },
     async postfavorite(id) {
       await this.$axios
