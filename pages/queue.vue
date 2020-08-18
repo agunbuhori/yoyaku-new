@@ -491,4 +491,8 @@ $bd-grey: #e5e5e5
     padding-top: 0px
     margin-top: -15px
 
+.owl-theme.owl-dots.owl-dot
+    width: 17px !important
+
+
 </style> 

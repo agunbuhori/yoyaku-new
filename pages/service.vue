@@ -47,7 +47,7 @@
           .rate-user(v-for="rates in snapshot.rating_data")
             .numb-1 {{ rates.rate }}
             |&nbsp;&nbsp;
-            progress.progress.is-small.is-warning(:value="rates.total / snapshot.user_rating * 100")
+            progress.progress.is-small.is-warning(:value="rates.total / snapshot.user_rating * 100" :max="100")
             |&nbsp;&nbsp;
             .numb.text-muted {{ rates.total / snapshot.user_rating * 100 }}%
           nuxt-link(:to="'/comment?id='+snapshot.id") 
