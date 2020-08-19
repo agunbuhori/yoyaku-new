@@ -2,9 +2,10 @@
     .wrapper
         Header
         div(v-if="snapshotLoaded")
-            carousel.sec-0.no-pb(items="1" :nav="false" v-if="snapshotLoaded")
-                a(v-for="adver in snapshot.advertisements" :href="adver.backlink")
-                    img(:src="'http://localhost/yoyaku-laravel/public/'+ adver.picture" )
+            carousel.sec-0.no-pb(items="1" :nav="false")
+                div(v-for="adver in snapshot.advertisements")
+                    a(:href="adver.backlink")
+                        img(:src="adver.picture" )
 
             section.sec-home
                 h2.section-title Spesialis
@@ -14,8 +15,8 @@
                             .item.centered.dir-column(@click="filterGroup(group.id)")
                                 img(:src="group.picture")
                                 span {{ group.name }}
-        section.sec-1
-            h2.has-text-weight-bold Berita
+        section.sec-home
+            h2.section-title Berita
             .categories
                 a.item(class="active")
                     span Semua Berita
@@ -131,6 +132,11 @@ $box: 90px
 $item: 150px
 $padding-item: 10px
 
+.banner 
+    width: 100%
+    height: 200px
+    background-color: $tosca
+
 .sec-1
     .faded
         display: inline-block
@@ -230,6 +236,6 @@ $padding-item: 10px
                 line-height: 13px
 .sec-home 
     padding-top: 0px
-    margin-top: -13px
+    // margin-top: -13px
 
 </style> 
