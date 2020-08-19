@@ -4,7 +4,7 @@
         section.sec-1
             .field-search
                 span(class="ti-search")
-                input.input(type="text" name="filter" @keyup="getSearch" v-model="search") 
+                input.input(type="text" name="filter" @keyup="getSearch" v-model="search" autocomplete="off") 
             .groups-filter
                 button.button.is-rounded.is-small.is-tosca.is-outlined(v-on:click='isOpen = !isOpen') Filter
                     span(class="ti-angle-down")
@@ -15,7 +15,7 @@
                 h5.has-text-weight-semibold.mt-10 Kategori
                 .filtered-two.mg-2
                     .control
-                        button(:class="{'active': category == filter.id}" v-for="filter in groups" @click="category = filter.id") {{ filter.name }}
+                        button(:class="{'active': category == filter.id}" v-for="filter in groups" @click="category = filter.id; filterResult(null); getSnapshot() ") {{ filter.name }}
                 h5.has-text-weight-semibold.mt-15 Harga
                 .filtered-two.mg-2
                     .control
@@ -240,7 +240,7 @@ $pd-10: 10px
         padding: $gap2
     .input
         margin-right: 15px
-        margin-top: 5px
+        margin-top: 0px
         border: none !important
         box-shadow: none !important
 

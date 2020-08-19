@@ -2,10 +2,11 @@
     .wrapper
         Header
         div(v-if="snapshotLoaded")
-            carousel.sec-0.no-pb(items="1" :nav="false")
-                div(v-for="adver in snapshot.advertisements")
-                    a(:href="adver.backlink")
-                        img(:src="adver.picture" )
+            div(v-for="index in 1")
+                carousel.sec-0.no-pb(items="1" :nav="false")
+                    div(v-for="adver in snapshot.advertisements")
+                        a(:href="adver.backlink")
+                            img(:src="adver.picture" )
 
             section.sec-home
                 h2.section-title Spesialis
