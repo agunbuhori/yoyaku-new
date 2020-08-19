@@ -401,7 +401,8 @@ $bd-grey: #e5e5e5
         font-weight: bold
         margin-top: 5px
     img
-        width: 30px
+        width: 10%
+        height: auto
         
 .ads-group
     padding: 0px
@@ -432,17 +433,17 @@ $bd-grey: #e5e5e5
                 display: flex
                 justify-content: center
                 align-items: center
-                // flex-direction: column
+                flex-direction: column
                 img
                     width: 70px
                     height: 70px
                     border-radius: 50%
 
-            // @media screen and (min-width: $small)
-            //     .main-img
-            //         img
-            //             width: 100px
-            //             height: 100px
+            @media screen and (min-width: $small)
+                .main-img
+                    img
+                        width: 100px
+                        height: 100px
 
             
 
