@@ -16,10 +16,10 @@
                         label {{ profile.label }}
                         span {{ profile.value }}
 
-            //- .button-prof
-            //-     nuxt-link(to="/history")
-            //-         button.button.btn-history.is-rounded Lihat Riwayat Sebelumnya
-            //-             span(class="ti-back-right")
+            .button-prof
+                nuxt-link(to="/history")
+                    button.button.btn-history.is-rounded Lihat Riwayat Sebelumnya
+                        span(class="ti-back-right")
 
                     
         BottomNav

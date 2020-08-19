@@ -2,8 +2,8 @@
     .wrapper
         Header
         div(v-if="snapshotLoaded")
-            div(v-for="index in 1")
-                carousel.sec-0.no-pb(items="1" :nav="false")
+            div(v-for="adver in snapshot.advertisements")
+                carousel.sec-0.no-pb(items="1" :nav="false" v-if="snapshotLoaded")
                     div(v-for="adver in snapshot.advertisements")
                         a(:href="adver.backlink")
                             img(:src="adver.picture" )

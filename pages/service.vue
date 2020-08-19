@@ -188,7 +188,7 @@ export default {
               background: none
 
               img.love
-                width: 40px !important
+                width: 30px !important
                 height: auto
 
 .desc-service
