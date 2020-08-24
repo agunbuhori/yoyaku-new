@@ -226,6 +226,7 @@ $pd-10: 10px
 
 .sec-search 
     padding: 0px 15px
+    margin-bottom: 4rem
 
 .is-red 
     color: red
@@ -247,7 +248,8 @@ $pd-10: 10px
 
 .groups-filter
     button 
-        margin-right: 10px
+        width: 63px
+        margin-right: 8px
 
 .filter-content 
     .filtered-two 
