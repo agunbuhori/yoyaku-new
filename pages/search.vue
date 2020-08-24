@@ -47,7 +47,7 @@
                             span(class="ti-star")
                             |  {{ service.rating }} ({{ service.user_rating }})
                     nuxt-link.b_two(:to="'/service?id='+service.id")
-                        h6.f12.has-text-weight-semibold {{ service.name.substring(0,25)+".." }}
+                        h6.f12.has-text-weight-semibold {{ service.name.substring(0,30) }}
                         h4.service-name {{ service.group_name }} 
                         h6.f10
                             span.mr-5(class="ti-bag")

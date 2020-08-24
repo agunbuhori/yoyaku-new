@@ -9,7 +9,7 @@
                             img(:src="adver.picture" )
 
             section.sec-home
-                h2.section-title Spesialis
+                h2.section-title.mt-10 Spesialis
                 .specialis
                     .menus
                         div(v-for="(group, $index) in snapshot.groups")
@@ -238,5 +238,8 @@ $padding-item: 10px
 .sec-home 
     padding-top: 0px
     // margin-top: -13px
+
+.mt-10
+    margin-top: 10px
 
 </style> 
