@@ -11,9 +11,9 @@
                         h6.f10(v-if="favorite.distance")
                             span(class="ti-location-pin") 
                             | {{ service.distance.toFixed(2) }} KM
-                        h6.f10(v-if="favorite.rating != '' ")
-                            span(class="ti-star")
-                            |  {{ favorite.rating }} ({{ favorite.user_rating }})
+                        .service-rate.f10(v-if="service.rating != '' ")
+                            img.star(src="/images/star.png")
+                            span  {{ service.rating }} ({{ service.user_rating }})
                     nuxt-link.b_two(:to="'/service?id='+favorite.id")
                         h6.f12.has-text-weight-semibold {{ favorite.name.substring(0,30) }}
                         h4.service-name {{ favorite.group_name }} 
@@ -141,6 +141,18 @@
 
             .b_one
                 width: 25%
+
+                .service-rate
+                    display: flex
+                    justify-content: left
+
+                    .star
+                        width: 15px
+                        height: 15px
+
+                    span 
+                        margin-left: 5px
+                        
                 .img-wrapper
                     width: 100%
                     img 
