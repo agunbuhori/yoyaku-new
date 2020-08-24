@@ -8,44 +8,41 @@
                 div(v-bind:class="{ 'is-active': isActive == 'service' }")
                     a.item__his(v-on:click="isActive = 'service'") Per Layanan
             .item-history(v-bind:class="{ 'is-active': isActive == 'year' }")
-                .years(v-for="i in 5")
+                .years(v-for="peryear in snapshot.per_year")
                     .dated
-                        h3.date 19
-                        h6.month Feb
-                        span.tag.is-primary 2020
+                        h3.date {{ peryear.date }}
+                        h6.month {{ peryear.month }}
+                        span.tag.is-primary {{ peryear.year }}
                     .dated__detail(@click="modalDetail()")
-                        h3.t-tosca Dr. Erick Francisco, Sp.A, M Kes
+                        h3.t-tosca {{ peryear.service.name }}
                         .detail__desc
-                            h4.has-text-grey Dokter Umum
-                            h4.has-text-weight-bold.has-text-black RKM0123131
-                        h6.title_detail Gejala
-                        ul
-                        li lorem ipsum dolor sit amet
-                        li lorem ipsum dolor sit amet
+                            h4.has-text-grey {{ peryear.service.group.name }}
+                            h4.has-text-weight-bold.has-text-black {{ peryear.record_number }}
+                        h6.title_detail.mt-05 Gejala
+                        h6.mt-05 {{ peryear.complaint | capitalize }}
             .item-history(v-bind:class="{ 'is-active': isActive == 'service' }")
-                .service(@click="toggleContent(0)")
-                    .item_service
-                        h4.has-text-weight-bold.t-tosca Dr. Erick Francisco, Sp.A, M Kes
-                        h6.has-text-weight-bold.has-text-grey Dokter Umum
-                        h6.has-text-weight-bold RKM0123131
-                    .icon_service
-                        span(:class="showContent[0] ? 'ti-angle-up' : 'ti-angle-down'")
-                .bottom-history(v-show="showContent[0]")
-                    .categories-year
-                        a.item(v-for="i in 7")
-                            span 2020
-                    table.table.is-bordered
-                        thead
-                            tr
-                                th Tanggal
-                                th Keterangan
-                        tbody
-                            tr
-                                td Senin, 9 Feb 2020
-                                td 
-                                    ul
-                                    li ui lorem ipsum dolor si amet lorem ipsum dolor sit 
-                                    li lorem ipsum dolor  
+                div(v-for="(perservice, $index) in snapshot.per_service")
+                    .service(@click="toggleContent($index)")
+                        .item_service
+                            h4.has-text-weight-bold.t-tosca {{ perservice.service.name }}
+                            h6.has-text-weight-bold.has-text-grey {{ perservice.service.group.name }}
+                            h6.has-text-weight-bold {{ perservice.record_number }}
+                        .icon_service
+                            span(:class="showContent[ $index] ? 'ti-angle-up' : 'ti-angle-down'")
+                    .bottom-history(v-show="showContent[ $index]")
+                        //- .categories-year
+                        //-     a.item(v-for="i in 7")
+                        //-         span 2020
+                        table.table.is-bordered(width="100%")
+                            thead
+                                tr
+                                    th Tanggal
+                                    th Keterangan
+                            tbody
+                                tr(v-for="queue in perservice.queues")
+                                    td(width="30%") {{ queue.checking_time }}
+                                    td 
+                                       p {{ queue.complaint | capitalize }}
             .modal-history
                 .modal(v-bind:class="{'is-active':isShow}")
                     .modal-background
@@ -69,6 +66,7 @@ import BottomNav from '~/components/BottomNav';
 import Header from '~/components/Header';
 
 export default {
+    middleware: "member",
     components: {
         BottomNav,
         Header
@@ -85,12 +83,12 @@ export default {
         }
     },
     computed: {
-        authentication() {
-            return this.$store.state.authentication
-        }
+       member() {
+        return this.$store.state.member;
+        },
     },
     mounted() {
-        // this.getSnapshot();
+        this.getSnapshot();
     },
     methods: {
         getSnapshot() {
@@ -113,6 +111,13 @@ export default {
         closeModal: function() {
             this.isShow = false;
         },
+    },
+    filters : {
+        capitalize: function (value) {
+            if (!value) return ''
+            value = value.toString()
+            return value.charAt(0).toUpperCase() + value.slice(1)
+        }
     }
 }
 </script>
@@ -251,12 +256,17 @@ $padding-item: 10px
         .modal-card-body 
             border-radius: 6px !important
             
-        
-                    
+.mt-05
+    margin-top: 5px
+
+.mt-10
+    margin-top: 10px                
 
 .t-tosca    
     color: $tosca
-    font-size: 13pt
+    font-size: 18px
+    font-weight: 700
+
 .pt 
     padding-top: $gap1
 </style> 

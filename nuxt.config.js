@@ -128,7 +128,7 @@ export default {
             propertyName: 'access_token' 
           },
           logout: {
-            url: 'http://localhost/yoyaku-laravel/public/api/social_login',
+            url: 'https://admin.yoyaku.id/api/social_login',
             method: 'post'
           }
         },

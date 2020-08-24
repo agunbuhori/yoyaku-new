@@ -27,8 +27,8 @@
                             span.mr-5(class="ti-alarm-clock")
                             span.fn-10(v-for="schedule in favorite.schedules") {{ schedule.day }}&nbsp;
                     .b_three
-                        button
-                            span.ti-heart(:class="{'is-red': true}" @click="postFavorite(favorite.id, $index)")
+                        button(@click="postFavorite(favorite.id, $index)")
+                            img(src="/images/red-love.png")
             BottomNav       
 </template>
 
@@ -167,8 +167,9 @@
                 button
                     border: none
                     background: none
-                    .ti-heart
-                        font-size: 25px
+
+                    img
+                        width: 40px
                         
         @media screen and (min-width: $small)
             .b_one

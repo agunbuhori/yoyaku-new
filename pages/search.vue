@@ -4,30 +4,31 @@
         section.sec-1
             .field-search
                 span(class="ti-search")
-                input.input(type="text" name="filter" @keyup="getSnapshot()" v-model="q") 
+                input.input(type="text" name="filter" @keyup="getSearch" v-model="search" autocomplete="off") 
             .groups-filter
                 button.button.is-rounded.is-small.is-tosca.is-outlined(v-on:click='isOpen = !isOpen') Filter
                     span(class="ti-angle-down")
                 button.button.is-rounded.is-small.is-tosca.is-outlined(@click="snapshot.services = []; filterResult('nearby'); getSnapshot()") Terdekat
+                button.button.is-rounded.is-small.is-tosca.is-outlined(@click="snapshot.services = []; filterResult('fastest'); getSnapshot()") Tercepat
                 button.button.is-rounded.is-small.is-tosca.is-outlined(@click="snapshot.services = []; filterResult('rating'); getSnapshot()") Rating
             .filter-content(v-show="isOpen")
                 h5.has-text-weight-semibold.mt-10 Kategori
-                .filtered-two
+                .filtered-two.mg-2
                     .control
-                        button(:class="{'active': category == filter.id}" v-for="filter in groups" @click="category = filter.id") {{ filter.name }}
-                h5.has-text-weight-semibold.mt-10 Harga
+                        button(:class="{'active': category == filter.id}" v-for="filter in groups" @click="category = filter.id; filterResult(null); getSnapshot() ") {{ filter.name }}
+                h5.has-text-weight-semibold.mt-15 Harga
                 .filtered-two.mg-2
                     .control
                         button(:class="{'active': filter === 'low'}" @click="filterResult('low')") Rp. 10.000 - Rp. 50.000
                         button(:class="{'active': filter === 'high'}" @click="filterResult('high')") Rp. 50.000 - Rp. 300.000
+                h5.has-text-weight-semibold.mt-15 Gender
                 .filtered-two.mg-2
                     .control
-                        button(:class="{'active': filter === 'fastest'}" @click="filterResult('fastest')") Antrian Tercepat
                         button(:class="{'active': filter === 'female'}" @click="filterResult('female')") Dokter Wanita
                         button(:class="{'active': filter === 'male'}" @click="filterResult('male')") Dokter Pria
                     
                 button(@click="snapshot.services = []; getSnapshot()").button.is-fullwidth.is-rounded.is-tosca.mt-10 Cari
-        section.sec-2
+        section.sec-search
             h2.section-title Hasil Pencarian
             carousel.sec-0.banner.no-pb(items="1" :nav="false" v-if="snapshotLoaded")
                 a(v-for="ads in snapshot.advertisements" :href="ads.backlink")
@@ -85,6 +86,7 @@ export default {
 
         return { snapshot, groups };
     },
+    middleware: "member",
     components: {
         BottomNav,
         carousel,
@@ -104,6 +106,7 @@ export default {
             q: "",
             minmax: '',
             favorites: [],
+            search: '',
         }
     },
     computed: {
@@ -134,6 +137,10 @@ export default {
         //         alert('It seems like Geolocation, which is required for this page, is not enabled in your browser. Please use a browser which supports it.');
         //     }
         // },
+        searchValue: function(event){
+            this.search = event.target.value;
+            alert(this.search);
+        },
         formatPrice(value) {
             let val = (value/1).toFixed(0).replace('.')
             return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
@@ -152,6 +159,13 @@ export default {
                     this.favorites.push(item.service_id);
                 })
             })
+        },
+        async getSearch(event) {
+             const data = await this.$options.asyncData(this.$root.$options.context, {
+                group_id: this.category,
+                filter: event.target.value
+            })
+            this.snapshot = data.snapshot;
         },
         async getSnapshot() {
             const data = await this.$options.asyncData(this.$root.$options.context, {
@@ -210,6 +224,9 @@ export default {
 $pd-15: 15px
 $pd-10: 10px
 
+.sec-search 
+    padding: 0px 15px
+
 .is-red 
     color: red
 
@@ -224,7 +241,7 @@ $pd-10: 10px
         padding: $gap2
     .input
         margin-right: 15px
-        margin-top: 5px
+        margin-top: 0px
         border: none !important
         box-shadow: none !important
 
@@ -255,6 +272,9 @@ $pd-10: 10px
                 width: 100%
                 cursor: pointer
                 text-align: left
+            
+                &:last-child
+                    border-bottom: none
 
                 &.active
                     background-color: $tosca
@@ -330,6 +350,10 @@ $pd-10: 10px
     padding: 10px
 .pt-10
     padding: 10px
+
+.mt-15
+    margin-top: 15px
+
 .mt-10
     margin-top: 10px
 .f10

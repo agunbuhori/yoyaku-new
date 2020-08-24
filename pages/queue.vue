@@ -96,7 +96,8 @@
         section.sec-3
             div(v-for="services in services")
                 .ads-title
-                    img(:src="services.picture")
+                    .logo
+                        img(:src="services.picture")
                     .text-title {{ services.name }}
                 carousel.ads-group(items="2" :nav="false")
                     .ads-group__item(v-for="service in services.services")
@@ -393,15 +394,17 @@ $bd-grey: #e5e5e5
             text-align: center !important
 
 .ads-title
-    display: flex
     margin-bottom: $gap1
+    display: inline-flex
 
     .text-title
         font-size: 18px
         font-weight: bold
         margin-top: 5px
-    img
-        width: 30px
+    .logo
+        width: 10%
+        img
+            height: auto !important
         
 .ads-group
     padding: 0px

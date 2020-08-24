@@ -6,27 +6,27 @@
       .checkbox-feature
         input#1(type='checkbox' v-model="rateTipe" value="1" @change="check($event)")
         label.checkbox(for='1')
-          span.ti-star 
+          img(src="/images/star.png" width="50%")
           h6.title-rate 1 ({{ snapshot.rating_data[0].total }})
       .checkbox-feature
         input#2(type='checkbox' v-model="rateTipe" value="2" @change="check($event)")
         label.checkbox(for='2')
-          span.ti-star
+          img(src="/images/star.png" width="50%")
           h6.title-rate 2 ({{ snapshot.rating_data[1].total }})
       .checkbox-feature
         input#3(type='checkbox' v-model="rateTipe" value="3" @change="check($event)")
         label.checkbox(for='3')
-          span.ti-star
+          img(src="/images/star.png" width="50%")
           h6.title-rate 3 ({{ snapshot.rating_data[2].total }})
       .checkbox-feature
         input#4(type='checkbox' v-model="rateTipe" value="4" @change="check($event)")
         label.checkbox(for='4')
-          span.ti-star
+          img(src="/images/star.png" width="50%")
           h6.title-rate 4 ({{ snapshot.rating_data[3].total }})
       .checkbox-feature
         input#5(type='checkbox' v-model="rateTipe" value="5" @change="check($event)")
         label.checkbox(for='5')
-          span.ti-star
+          img(src="/images/star.png" width="50%")
           h6.title-rate 5 ({{ snapshot.rating_data[4].total }})
     .rate-user
       .div.has-text-centered
@@ -156,9 +156,9 @@ export default {
     label.checkbox 
       display: inline-block
       cursor: pointer
-      padding: 10px 0px
+      padding: 5px 0px
       width: 100%
-      height: 80px
+      height: 65px
       text-align: center
       border: 1px solid #ccc
       color: #000
