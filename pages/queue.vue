@@ -428,7 +428,7 @@ $bd-grey: #e5e5e5
                 justify-content: center
 
                 .star
-                    width: 20px
+                    width: 10%
                 
                 span 
                     margin-left: 5px
