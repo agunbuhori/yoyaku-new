@@ -248,7 +248,7 @@ $pd-10: 10px
 
 .groups-filter
     button 
-        width: 63px
+        width: 75px
         margin-right: 8px
 
 .filter-content 
