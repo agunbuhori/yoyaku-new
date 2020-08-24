@@ -4,10 +4,10 @@
         section.sec-tosca
            .profile-services
                 .pict
-                    img(:src="snapshot.picture ? snapshot.picture : '/images/default.png' ")
+                    img.service-img(:src="snapshot.picture ? snapshot.picture : '/images/default.png' ")
                     .favorite
-                        button
-                            span.ti-heart(@click="postfavorite(snapshot.id)" :style="snapshot.favorite ? { 'color': 'red' } : null")
+                        button(@click="postfavorite(snapshot.id)")
+                            img.love(:src="snapshot.favorite ? '/images/red-love.png' :'/images/default-love.png'" )
                 h5.title-service.gap-2 {{ snapshot.name }}
                 h5.f14-service {{ snapshot.group.name }}
                 .d-flex.gap-2
@@ -263,27 +263,31 @@
         .pict
             display: flex
             justify-content: center
-            align-items:center
-            img 
+            align-items: center
+
+            img.service-img 
                 border-radius: 50%
                 width: 135px
                 height: 135px
+
             .favorite 
                 background-color: white
-                width: 50px
-                height: 50px
+                // width: 50px
+                // height: 50px
                 border-radius: 50%
                 margin-left: -30px
                 margin-top: 85px
                 text-align: center
                 padding-top: 8px
+
                 button 
                     border: none
                     background: none
 
-                    .ti-heart
-                        color: #ccc
-                        font-size: 30px
+                img.love
+                    width: 30px !important
+                    height: auto
+
     .desc-service
         .select-day 
             overflow-x: scroll

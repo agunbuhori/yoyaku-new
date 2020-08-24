@@ -43,9 +43,9 @@
                         h6.f10(v-if="service.distance")
                             span(class="ti-location-pin") 
                             | {{ service.distance.toFixed(2) }} KM
-                        h6.f10(v-if="service.rating != '' ")
-                            span(class="ti-star")
-                            |  {{ service.rating }} ({{ service.user_rating }})
+                        .service-rate.f10(v-if="service.rating != '' ")
+                            img.star(src="/images/star.png")
+                            span  {{ service.rating }} ({{ service.user_rating }})
                     nuxt-link.b_two(:to="'/service?id='+service.id")
                         h6.f12.has-text-weight-semibold {{ service.name.substring(0,30) }}
                         h4.service-name {{ service.group_name }} 
@@ -301,6 +301,18 @@ $pd-10: 10px
 
         .b_one
             width: 25%
+
+            .service-rate
+                display: flex
+                justify-content: left
+
+                .star
+                    width: 15px
+                    height: 15px
+
+                span 
+                    margin-left: 5px
+                    
             .img-ads
                 width: 40px
                 z-index: 15 

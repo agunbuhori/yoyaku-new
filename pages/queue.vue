@@ -112,7 +112,7 @@
                                     img.star(src="/images/star.png")
                                     span  {{ service.rating }}
                                 .rate-add(v-if="service.rating == '' ")
-                                    img.star(src="/images/star.png" width="10%")
+                                    img.star(src="/images/star.png")
                                     span -
 
         
