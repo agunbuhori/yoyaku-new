@@ -8,23 +8,7 @@
 import firebase from 'firebase';
 export default {
   mounted() {
-    window.Notification.requestPermission();
-
-    const _vn = this;
-
-    navigator.serviceWorker.getRegistration().then(function(reg) {  
-      let count = 10;
-      setInterval(() => {
-        _vn.$axios.$get('/check_notification').then(response => {
-          if (response.show)
-            reg.showNotification(response.message);
-        })
-      }, 10000);
-    });
-    self.addEventListener('notificationclick', function (event) {
-    event.notification.close();
-    clients.openWindow("https://m.yoyaku.id/queue");
-  });
+   
   }
 }
 </script>

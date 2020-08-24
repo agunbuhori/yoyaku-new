@@ -50,6 +50,7 @@ export default {
     'plugins/firebase.js',
     'plugins/axios.js',
     'plugins/authentication.js',
+    'plugins/notification.js',
   ],
   /*
   ** Nuxt.js dev-modules
@@ -110,7 +111,7 @@ export default {
         scope: ['public_profile', 'email', 'user_birthday']
       },
       'laravel.passport': {
-        url: 'http://localhost/yoyaku-laravel/public/api/social_login',
+        url: 'https://admin.yoyaku.id/api/social_login',
         client_id: 1,
         client_secret: 'xUVXhO7nOPQ8Xx9xGUuqdUIEZhTVJBy4K6efkR1g'
       },
@@ -122,7 +123,7 @@ export default {
         endpoints: {
           user: false,
           login: { 
-            url: 'http://localhost/yoyaku-laravel/public/api/social_login',
+            url: 'https://admin.yoyaku.id/api/social_login',
             method: 'post',
             propertyName: 'access_token' 
           },

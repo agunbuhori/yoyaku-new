@@ -70,6 +70,7 @@ import Header from '~/components/Header';
 import carousel from 'v-owl-carousel';
 
 export default {
+    middleware: 'member',
     async asyncData({$axios, route, params, store}, query = {
             lat: store.state.location.latitude, 
             long: store.state.location.longitude,
