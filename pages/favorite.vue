@@ -15,7 +15,7 @@
                             span(class="ti-star")
                             |  {{ favorite.rating }} ({{ favorite.user_rating }})
                     nuxt-link.b_two(:to="'/service?id='+favorite.id")
-                        h6.f12.has-text-weight-semibold {{ favorite.name.substring(0,25)+".." }}
+                        h6.f12.has-text-weight-semibold {{ favorite.name.substring(0,30) }}
                         h4.service-name {{ favorite.group_name }} 
                         h6.f10
                             span.mr-5(class="ti-bag")
