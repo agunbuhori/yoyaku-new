@@ -108,12 +108,12 @@
                                 .main-img
                                     img(:src="service.picture ? service.picture : '/images/default.png'")
                                 h6.has-text-weight-bold {{service.name}}
-                                h6(v-if="service.rating != '' ")
-                                    span(class="ti-star")
-                                    |  {{ service.rating }}
-                                h6(v-if="service.rating == '' ")
-                                    span(class="ti-star")
-                                    |  -
+                                .rate-add(v-if="service.rating != '' ")
+                                    img.star(src="/images/star.png")
+                                    span  {{ service.rating }}
+                                .rate-add(v-if="service.rating == '' ")
+                                    img.star(src="/images/star.png" width="10%")
+                                    span -
 
         
         BottomNav
@@ -422,6 +422,16 @@ $bd-grey: #e5e5e5
             text-align: center
             display: block
             padding: 5px
+
+            .rate-add
+                display: flex
+                justify-content: center
+
+                .star
+                    width: 20px
+                
+                span 
+                    margin-left: 5px
         
             .img-ads
                 width: 40px
