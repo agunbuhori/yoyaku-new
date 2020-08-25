@@ -59,8 +59,10 @@
                             span.mr-5(class="ti-alarm-clock")
                             span.fn-10(v-for="schedule in service.schedules") {{ schedule.day }} &nbsp;
                     .b_three
-                        button
-                            //- span.ti-heart(:class="{'is-red': favorites.indexOf(service.id) != -1}" @click="postFavorite(service.id)")
+                        //- button
+                        //-     img.love(:src="service.favorite == 1 ? '/images/red-love.png' :'/images/default-love.png'" @click="postFavorite(service.id, $index)")
+                        //- button
+                        //-     span.ti-heart(:class="{'is-red': favorites.indexOf(service.id) != -1}" @click="postFavorite(service.id)")
 
         BottomNav
 </template>
@@ -83,8 +85,9 @@ export default {
 
         const snapshot = data.services;
         const groups = data.groups;
+        const love = data.services.favorite;
 
-        return { snapshot, groups };
+        return { snapshot, groups, love };
     },
     middleware: "member",
     components: {
@@ -120,6 +123,7 @@ export default {
     mounted() {
         // this.getCategories();
         // this.getSnapshot();
+        // this.getFavorites();
 
         this.category = this.$route.query.group;
     },
@@ -151,15 +155,13 @@ export default {
                 this.categories = response.groups;
             });
         },
-        getFavorites() {
-            this.$axios.$get("favorites/"+this.member.uid)
-            .then(response => {
-                if (response.length)
-                response.forEach(item => {
-                    this.favorites.push(item.service_id);
-                })
-            })
-        },
+        // getFavorites() {
+        //     this.$axios.$get("favorites/"+this.member.uid+"?with_detail=true")
+        //     .then(response => {
+        //         console.log(response)
+        //         this.favorites = response;
+        //     })
+        // },
         async getSearch(event) {
              const data = await this.$options.asyncData(this.$root.$options.context, {
                 group_id: this.category,
@@ -195,22 +197,26 @@ export default {
         filterResult(filter) {
             this.filter = filter;
         },
-        postFavorite(id){
-            this.$axios.$post("favorite", {
+        async postFavorite(id, index){
+            // alert(this.favorites)
+            this.$axios.$post("add_favorite", {
                 service_id: id,
-                favorite: this.favorites.indexOf(id) != -1 ? 0 : 1,
-                uid: this.member.uid
+                favorite: this.favorites == 0 ? 1 : 0,
             })
             .then(response => {
-                if (response === 1)
-                    this.favorites.push(id);
-                else {
-                    this.favorites.forEach((item, index) => {
-                        if (item === id)
-                            this.favorites.splice(index, 1)
-                    })
-                }
+                this.favorites = !this.favorites;
+                // if (response === 1)
+                //     this.favorites.push(id);
+                // else {
+                //     this.favorites.forEach((item, index) => {
+                //         if (item === id)
+                //             this.favorites.splice(index, 1)
+                //     })
+                // }
             })
+        },
+        inArray(item) {
+            return this.favorites.indexOf(item) != '-1';
         },
         checkFavorite(id){
             

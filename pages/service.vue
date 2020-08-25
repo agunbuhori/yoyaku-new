@@ -141,6 +141,7 @@ export default {
         });
     },
     async postfavorite(id) {
+      // alert(this.snapshot.favorite)
       await this.$axios
         .$post("add_favorite", {
           service_id: id,

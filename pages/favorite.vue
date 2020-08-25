@@ -19,7 +19,7 @@
                         h4.service-name {{ favorite.group_name }} 
                         h6.f10
                             span.mr-5(class="ti-bag")
-                            | {{ favorite.since }} Tahun Pengalaman
+                            | {{ favorite.since }} Tahun
                         h6.f10
                             span.mr-5(class="ti-wallet")
                             | Mulai Rp. {{formatPrice(favorite.price) }}
