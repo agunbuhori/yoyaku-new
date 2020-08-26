@@ -13,7 +13,13 @@ export default async function ({$axios}) {
       }, 10000);
     });
     self.addEventListener('notificationclick', function (event) {
-    event.notification.close();
-    clients.openWindow("https://m.yoyaku.id/queue");
+      var url = 'https://m.yoyaku.id/queue';
+      
+      event.notification.close();
+
+      event.waitUntil(
+        clients.openWindow(url)
+      );
+      // clients.openWindow("https://m.yoyaku.id/queue");
   });
 }
