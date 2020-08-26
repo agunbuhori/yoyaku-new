@@ -60,7 +60,7 @@
                             span.fn-10(v-for="schedule in service.schedules") {{ schedule.day }} &nbsp;
                     .b_three
                         button
-                            img.love(:src="service.favorite == 1 ? '/images/red-love.png' :'/images/default-love.png'" @click="postFavorite(service.id, $index)")
+                            img.love(:src="service.favorite == 1 ? '/images/red-love.png' :'/images/default-love.png'" @click="postFavorite(service)")
                         //- button
                         //-     span.ti-heart(:class="{'is-red': favorites.indexOf(service.id) != -1}" @click="postFavorite(service.id)")
 
@@ -197,22 +197,14 @@ export default {
         filterResult(filter) {
             this.filter = filter;
         },
-        async postFavorite(id, index){
-            // alert(this.favorites)
-            this.$axios.$post("add_favorite", {
-                service_id: id,
-                favorite: this.favorites == 0 ? 1 : 0,
+        async postFavorite(service){
+            await this.$axios
+            .$post("add_favorite", {
+                service_id: service.id,
+                favorite: service.favorite == 0 ? 1 : 0,
             })
             .then(response => {
-                this.favorites = !this.favorites;
-                // if (response === 1)
-                //     this.favorites.push(id);
-                // else {
-                //     this.favorites.forEach((item, index) => {
-                //         if (item === id)
-                //             this.favorites.splice(index, 1)
-                //     })
-                // }
+                service.favorite = !service.favorite ;
             })
         },
         inArray(item) {
