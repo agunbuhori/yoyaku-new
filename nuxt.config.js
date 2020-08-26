@@ -76,7 +76,7 @@ export default {
       name: 'Yoyaku ID',
       short_name: 'Yoyaku',
       lang: 'id',
-      display: 'browser',
+      display: 'standalone',
       icons: [
         {
           'src': '/images/icons/icon-96x96.png',

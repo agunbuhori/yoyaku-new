@@ -43,21 +43,21 @@
                                     td(width="30%") {{ queue.checking_time }}
                                     td 
                                        p {{ queue.complaint | capitalize }}
-            .modal-history
-                .modal(v-bind:class="{'is-active':isShow}")
-                    .modal-background
-                    .modal-card
-                        button.delete.btn-close(aria-label="close" @click='closeModal()')
-                        .modal-card-body.body-history
-                            .dated__detail(@click="modalDetail()")
-                            h3.t-tosca Dr. Erick Francisco, Sp.A, M Kes
-                            .detail_desc
-                                h4.has-text-grey Dokter Umum
-                                h4.has-text-weight-bold.has-text-black RKM0123131
-                            h6.pt Gejala
-                            ul
-                            li lorem ipsum dolor sit amet
-                            li lorem ipsum dolor sit amet
+            //- .modal-history
+            //-     .modal(v-bind:class="{'is-active':isShow}")
+            //-         .modal-background
+            //-         .modal-card
+            //-             button.delete.btn-close(aria-label="close" @click='closeModal()')
+            //-             .modal-card-body.body-history
+            //-                 .dated__detail(@click="modalDetail()")
+            //-                 h3.t-tosca Dr. Erick Francisco, Sp.A, M Kes
+            //-                 .detail_desc
+            //-                     h4.has-text-grey Dokter Umum
+            //-                     h4.has-text-weight-bold.has-text-black RKM0123131
+            //-                 h6.pt Gejala
+            //-                 ul
+            //-                 li lorem ipsum dolor sit amet
+            //-                 li lorem ipsum dolor sit amet
         BottomNav
 </template>
 
@@ -72,13 +72,27 @@ export default {
         Header
     },
     data() {
+        // for (let i = 0; i < 1000; i++) {
+        //     const content = array[i];
+        // };
         return {
             isShow: false,
             isActive: 'year',
             snapshot: {},
+            test: 0,
             snapshotLoaded: false,
             showContent: {
                 0: false,
+                1: false,
+                2: false,
+                3: false,
+                4: false,
+                5: false,
+                6: false,
+                7: false,
+                8: false,
+                9: false,
+                10: false,
             },
         }
     },
