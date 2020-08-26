@@ -3,6 +3,8 @@ export default async function ({$axios}) {
 
     const _vn = this;
 
+    var notification;
+
     navigator.serviceWorker.getRegistration().then(function(reg) {  
       let count = 10;
       setInterval(() => {
@@ -12,6 +14,7 @@ export default async function ({$axios}) {
         })
       }, 10000);
     });
+    
     self.addEventListener('notificationclick', function (event) {
       var url = 'https://m.yoyaku.id/queue';
       

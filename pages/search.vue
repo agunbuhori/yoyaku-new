@@ -59,8 +59,8 @@
                             span.mr-5(class="ti-alarm-clock")
                             span.fn-10(v-for="schedule in service.schedules") {{ schedule.day }} &nbsp;
                     .b_three
-                        //- button
-                        //-     img.love(:src="service.favorite == 1 ? '/images/red-love.png' :'/images/default-love.png'" @click="postFavorite(service.id, $index)")
+                        button
+                            img.love(:src="service.favorite == 1 ? '/images/red-love.png' :'/images/default-love.png'" @click="postFavorite(service.id, $index)")
                         //- button
                         //-     span.ti-heart(:class="{'is-red': favorites.indexOf(service.id) != -1}" @click="postFavorite(service.id)")
 
