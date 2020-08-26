@@ -12,22 +12,35 @@ export default async function ({$axios}) {
         })
       }, 10000);
     });
-    self.addEventListener('notificationclick', function (event) {
-      var url = event.notification.data.redirectUrl;
-
-      event.waitUntil(
-        clients.matchAll({type: 'window'}).then( windowClients => {
-            for (var i = 0; i < windowClients.length; i++) {
-                var client = windowClients[i];
-                if (client.url === url && 'focus' in client) {
-                    return client.focus();
+    self.addEventListener("notificationclick", (event) => {
+        event.waitUntil(async function () {
+            const allClients = await clients.matchAll({
+                includeUncontrolled: true
+            });
+            let chatClient;
+            let appUrl = 'https://m.yoyaku.id/queue';
+            for (const client of allClients) {
+            //here appUrl is the application url, we are checking it application tab is open
+                if(client['url'].indexOf(appUrl) >= 0) 
+                {
+                    client.focus();
+                    chatClient = client;
+                    break;
                 }
             }
-            if (clients.openWindow) {
-                return clients.openWindow(url);
+            if (!chatClient) {
+                chatClient = await clients.openWindow(appUrl);
             }
-        })
-    );
-      // clients.openWindow("https://m.yoyaku.id/queue");
-  });
+        }());
+    });
+  //   self.addEventListener('notificationclick', function (event) {
+  //     var url = 'https://m.yoyaku.id/queue;
+      
+  //     event.notification.close();
+
+  //     event.waitUntil(
+  //       clients.openWindow(url)
+  //     );
+  //     // clients.openWindow("https://m.yoyaku.id/queue");
+  // });
 }
