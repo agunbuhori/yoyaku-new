@@ -111,7 +111,7 @@ export default {
         scope: ['public_profile', 'email', 'user_birthday']
       },
       'laravel.passport': {
-        url: 'https://admin.yoyaku.id/api/social_login',
+        url: 'https://localhost:8000/api/social_login',
         client_id: 1,
         client_secret: 'xUVXhO7nOPQ8Xx9xGUuqdUIEZhTVJBy4K6efkR1g'
       },
@@ -123,12 +123,12 @@ export default {
         endpoints: {
           user: false,
           login: { 
-            url: 'https://admin.yoyaku.id/api/social_login',
+            url: 'https://localhost:8000/api/social_login',
             method: 'post',
             propertyName: 'access_token' 
           },
           logout: {
-            url: 'https://admin.yoyaku.id/api/social_login',
+            url: 'https://localhost:8000/api/social_login',
             method: 'post'
           }
         },
